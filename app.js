@@ -9,7 +9,7 @@ function getUserInput() {
     event.preventDefault();
     const userInfo = getUserValues();
     console.log(userInfo);
-    $.post(postURL, userInfo)
+    $.post(postURL, userInfo);
       .then(function(result) {
       console.log(result);
     })
