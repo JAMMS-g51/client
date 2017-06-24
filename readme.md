@@ -8,4 +8,4 @@
 
 #####Will allow the user to see visual representation of their tasks organized by priority, to message other users, create projects, assign tasks/stories, etc.
 
-![Alt text](file:///Users/andrewalvarez/Desktop/Screen%20Shot%202017-06-24%20at%203.19.18%20PM.png)
+![ERD image](https://www.lucidchart.com/documents/edit/758efd17-85ac-494d-ab6a-9f45c8b40a9a?shared=true&#)
