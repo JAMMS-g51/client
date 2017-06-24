@@ -13,18 +13,23 @@
     <div class="nav-wrapper">
       <a href="#" class="brand-logo">Logo</a>
       <ul id="nav-mobile" class="right hide-on-med-and-down">
-        <li><a href="sass.html">Sass</a></li>
-        <li><a href="badges.html">Components</a></li>
-        <li><a href="collapsible.html">JavaScript</a></li>
+        <li><a href="#">Login</a></li>
+        <li><a href="#">Sign Up</a></li>
+
       </ul>
     </div>
   </nav>
-  <main>
-    <form class="create-account container">
-      <input class='user-name' type="text" name="" value="" placeholder="Name" required>
-      <input class="user-email" type="email" name="" value="" placeholder="Email" required>
-      <input class="user-password" type="password" name="" value="" placeholder="Password" required>
+  <main class="container">
+    <form class="create-account">
+      <input class='user-name' type="text" name="" placeholder="Name" required>
+      <input class="user-email" type="email" name="" placeholder="Email" required>
+      <input class="user-password" type="password"  placeholder="Password" required>
       <button class='btn' type="submit" name="button">Sign Up</button>
+    </form>
+    <form class="user-login">
+      <input class="login-email" type="email" placeholder="Email" required>
+      <input class="login-password" type="password" placeholder="Password" required>
+      <button class="btn" type="button" name="button">Login</button>
     </form>
   </main>
   <footer class="page-footer">

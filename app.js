@@ -1,4 +1,5 @@
 const postURL = 'http://localhost:3000/api/v1/users';
+const loginURL = 'http://localhost:3000/api/v1/auth/login';
 $(appReady)
 
 function appReady() {
@@ -17,6 +18,11 @@ function getUserInput() {
       console.log(result);
     });
   })
+  $('.user-login').submit(function(event) {
+    event.preventDefault();
+    const loginInfo = getLoginInfo();
+    $.post(loginURL, loginInfo)
+  })
 }
 function getUserValues() {
   let userName = $('.user-name').val();
@@ -28,4 +34,12 @@ function getUserValues() {
     "password": userPassword
   }
   return userInfo;
+}
+function getLoginInfo() {
+  let loginEmail = $('.login-email').val();
+  let loginPassword = $('.login-password').val()
+  const loginInfo = {
+    email: loginEmail,
+    password: loginPassword
+  }
 }
