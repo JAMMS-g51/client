@@ -11,7 +11,8 @@ function getUserInput() {
   $('.create-account').submit(function(event) {
     event.preventDefault();
     const userInfo = getUserValues();
-    $.post(postURL, userInfo)
+    console.log(userInfo);
+    $.post(postURL, userInfo);
       .then(function(result) {
       console.log(result);
     })
