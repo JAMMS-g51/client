@@ -4,12 +4,13 @@ $(appReady)
 
 function appReady() {
   getUserInput();
+  initializeLogin();
+  initTestButton();
 }
 function getUserInput() {
   $('.create-account').submit(function(event) {
     event.preventDefault();
     const userInfo = getUserValues();
-    console.log(userInfo);
     $.post(postURL, userInfo)
       .then(function(result) {
       console.log(result);
@@ -18,12 +19,21 @@ function getUserInput() {
       console.log(result);
     });
   })
-  $('.user-login').submit(function(event) {
-    event.preventDefault();
-    const loginInfo = getLoginInfo();
-    $.post(loginURL, loginInfo)
-  })
 }
+
+function initializeLogin() {
+	$('.user-login').submit(function(event) {
+		console.log('button working');
+	  event.preventDefault();
+	  const loginInfo = getLoginInfo();
+	  $.post(loginURL, loginInfo).then(response => {
+		  console.log(response);
+	  })
+  });
+}
+
+
+
 function getUserValues() {
   let userName = $('.user-name').val();
   let userEmail = $('.user-email').val();
@@ -35,6 +45,8 @@ function getUserValues() {
   }
   return userInfo;
 }
+
+
 function getLoginInfo() {
   let loginEmail = $('.login-email').val();
   let loginPassword = $('.login-password').val()
@@ -42,4 +54,18 @@ function getLoginInfo() {
     email: loginEmail,
     password: loginPassword
   }
+  return loginInfo;
+}
+
+
+function testGet() {
+	$.get(postURL).then(res => {
+		console.log(res);
+	});
+}
+
+function initTestButton() {
+	$('.testbutton').click(() => {
+		testGet();
+	});
 }
