@@ -1,13 +1,52 @@
 const postURL = 'http://localhost:3000/api/v1/users';
 const loginURL = 'http://localhost:3000/api/v1/auth/login';
-$(appReady)
+$(appReady);
 
+let projects = [
+	{
+		name: 'Project1',
+		image: 'https://www.petfinder.com/wp-content/uploads/2012/11/91615172-find-a-lump-on-cats-skin-632x475.jpg'
+	},
+	{
+		name: 'Project2',
+		image: 'https://www.petfinder.com/wp-content/uploads/2012/11/91615172-find-a-lump-on-cats-skin-632x475.jpg'
+	},
+	{
+		name: 'Project3',
+		image: 'https://www.petfinder.com/wp-content/uploads/2012/11/91615172-find-a-lump-on-cats-skin-632x475.jpg'
+	},
+	{
+		name: 'Project4',
+		image: 'https://www.petfinder.com/wp-content/uploads/2012/11/91615172-find-a-lump-on-cats-skin-632x475.jpg'
+	}
+];
 function appReady() {
-  initializeSignUp();
-  initializeLogin();
-  initModals();
+	checkLoggedIn();
 }
 
+
+function checkLoggedIn() {
+	if(localStorage.user_id) {
+		getUserProjects(localStorage.user_id);
+	} else {
+		getLoginPage();
+	}
+}
+
+function getUserProjects(userId) {
+	$.get(`${postURL}/${userId}/project`).then(projects => {
+		displayProjects(projects);
+	});
+}
+
+function displayProjects(projects) {
+	projects.forEach(project => {
+		const source = $('#project-template').html();
+		const template = Handlebars.compile(source);
+		const html = template(project);
+		$('.project-page').append(html);
+	});
+}
 
 function initializeSignUp() {
   $('.create-account').submit(function(event) {
@@ -33,7 +72,12 @@ function initializeLogin() {
     })
   });
 }
-
+function getLoginPage() {
+	initializeSignUp();
+	initializeLogin();
+	initModals();
+	$('.login-page').css('display', 'block');
+}
 
 function getSignUpInfo() {
   let userName = $('.user-name').val();
