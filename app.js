@@ -1,14 +1,34 @@
 const postURL = 'http://localhost:3000/api/v1/users';
 const loginURL = 'http://localhost:3000/api/v1/auth/login';
-$(appReady)
+$(appReady);
 
 function appReady() {
-  initializeSignUp();
-  initializeLogin();
-  initModals();
-  getProjects();
+	checkLoggedIn();
 }
 
+
+function checkLoggedIn() {
+	if(localStorage.user_id) {
+		getUserProjects(localStorage.user_id);
+	} else {
+		getLoginPage();
+	}
+}
+
+function getUserProjects(userId) {
+	$.get(`${postURL}/${userId}/project`).then(projects => {
+		displayProjects(projects);
+	});
+}
+
+function displayProjects(projects) {
+	projects.forEach(project => {
+		const source = $('#project-template').html();
+		const template = Handlebars.compile(source);
+		const html = template(project);
+		$('.project-page').append(html);
+	});
+}
 
 function initializeSignUp() {
   $('.create-account').submit(function(event) {
@@ -34,16 +54,17 @@ function initializeLogin() {
       console.log(response);
       localStorage.token = response.token;
       localStorage.user_id = response.id;
-      setIdRedirect(localStorage.user_id);
     })
   });
 }
 
-function setIdRedirect(id){
-  localStorage.user_id = id;
-  window.location = `/index.html?id=${localStorage.user_id}`;
-}
 
+function getLoginPage() {
+	initializeSignUp();
+	initializeLogin();
+	initModals();
+	$('.login-page').css('display', 'block');
+}
 
 function getSignUpInfo() {
   let userName = $('.user-name').val();
@@ -71,15 +92,15 @@ function initModals() {
   $('.modal').modal();
 }
 
-function getProjects(id){
-  if(localStorage.token && localStorage.user_id){
-    return $.get({
-      url: `${postURL}/${localStorage.user_id}/project`,
-      headers: {
-        Authorization: `Bearer ${localStorage.token}`
-     }
-   }).then(response => {
-     console.log(response);
-   });
-  }
-}
+// function getProjects(id){
+//   if(localStorage.token && localStorage.user_id){
+//     return $.get({
+//       url: `${postURL}/${localStorage.user_id}/project`,
+//       headers: {
+//         Authorization: `Bearer ${localStorage.token}`
+//      }
+//    }).then(response => {
+//      console.log(response);
+//    });
+//   }
+// }
