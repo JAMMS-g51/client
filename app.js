@@ -3,76 +3,60 @@ const loginURL = 'http://localhost:3000/api/v1/auth/login';
 $(appReady)
 
 function appReady() {
-  getUserInput();
+  initializeSignUp();
   initializeLogin();
-  initTestButton();
   initModals();
 }
-function getUserInput() {
+
+
+function initializeSignUp() {
   $('.create-account').submit(function(event) {
     event.preventDefault();
-    const userInfo = getUserValues();
-    console.log(userInfo);
+    const userInfo = getSignUpInfo();
     $.post(postURL, userInfo)
       .then(function(result) {
-      console.log(result);
-    })
-    .catch(function(result){
-      console.log(result);
-    });
+        console.log(result);
+      })
+      .catch(function(result) {
+        console.log(result);
+      });
   })
 }
 
+
 function initializeLogin() {
-	$('.user-login').submit(function(event) {
-		console.log('button working');
-	  event.preventDefault();
-	  const loginInfo = getLoginInfo();
-	  $.post(loginURL, loginInfo).then(response => {
-		  console.log(response);
-	  })
+  $('.user-login').submit(function(event) {
+    event.preventDefault();
+    const loginInfo = getLoginInfo();
+    $.post(loginURL, loginInfo).then(response => {
+      console.log(response);
+    })
   });
 }
 
 
-
-function getUserValues() {
+function getSignUpInfo() {
   let userName = $('.user-name').val();
   let userEmail = $('.user-email').val();
   let userPassword = $('.user-password').val();
-  const userInfo = {
-    "name": userName,
-    "email": userEmail,
-    "password": userPassword
+  return {
+    name: userName,
+    email: userEmail,
+    password: userPassword
   }
-  return userInfo;
 }
 
 
 function getLoginInfo() {
   let loginEmail = $('.login-email').val();
   let loginPassword = $('.login-password').val()
-  const loginInfo = {
+  return {
     email: loginEmail,
     password: loginPassword
   }
-  return loginInfo;
-}
-
-
-function testGet() {
-	$.get(postURL).then(res => {
-		console.log(res);
-	});
-}
-
-function initTestButton() {
-	$('.testbutton').click(() => {
-		testGet();
-	});
 }
 
 
 function initModals() {
-	$('.modal').modal();
+  $('.modal').modal();
 }
