@@ -6,6 +6,7 @@ function appReady() {
   initializeSignUp();
   initializeLogin();
   initModals();
+  getProjects();
 }
 
 
@@ -25,13 +26,22 @@ function initializeSignUp() {
 
 
 function initializeLogin() {
-  $('.user-login').submit(function(event) {
+  $('.login-account').submit(function(event) {
     event.preventDefault();
     const loginInfo = getLoginInfo();
+    console.log(loginInfo);
     $.post(loginURL, loginInfo).then(response => {
       console.log(response);
+      localStorage.token = response.token;
+      localStorage.user_id = response.id;
+      setIdRedirect(localStorage.user_id);
     })
   });
+}
+
+function setIdRedirect(id){
+  localStorage.user_id = id;
+  window.location = `/index.html?id=${localStorage.user_id}`;
 }
 
 
@@ -59,4 +69,17 @@ function getLoginInfo() {
 
 function initModals() {
   $('.modal').modal();
+}
+
+function getProjects(id){
+  if(localStorage.token && localStorage.user_id){
+    return $.get({
+      url: `${postURL}/${localStorage.user_id}/project`,
+      headers: {
+        Authorization: `Bearer ${localStorage.token}`
+     }
+   }).then(response => {
+     console.log(response);
+   });
+  }
 }
