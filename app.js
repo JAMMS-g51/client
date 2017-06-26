@@ -6,13 +6,14 @@ function appReady() {
   getUserInput();
   initializeLogin();
   initTestButton();
+  initModals();
 }
 function getUserInput() {
   $('.create-account').submit(function(event) {
     event.preventDefault();
     const userInfo = getUserValues();
     console.log(userInfo);
-    $.post(postURL, userInfo);
+    $.post(postURL, userInfo)
       .then(function(result) {
       console.log(result);
     })
@@ -69,4 +70,9 @@ function initTestButton() {
 	$('.testbutton').click(() => {
 		testGet();
 	});
+}
+
+
+function initModals() {
+	$('.modal').modal();
 }

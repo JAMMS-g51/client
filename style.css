@@ -1,0 +1,32 @@
+body {
+	display: flex;
+	min-height: 100vh;
+	flex-direction: column;
+}
+
+main {
+	flex: 1 0 auto;
+}
+
+.landing-focus {
+	display: flex;
+	flex-flow: column;
+	align-items: center;
+	justify-content: center;
+	background-image: url("media/thomas-lefebvre-3950.jpg");
+	margin: 2% 0 2% 0;
+	width: 100vw;
+	height: 75vh;
+	background-size: 100% auto;
+	background-repeat: no-repeat;
+}
+
+.landing-image {
+
+}
+
+
+
+.modal-signup {
+	width: 40%;
+}
