@@ -21,14 +21,15 @@
     </div>
   </nav>
   <main class="container-fluid">
-    <div class="landing-background">
-      <div class="landing-focus">
-        <h1 class="landing-title">Jello</h1>
-        <h5 class="landing-tagline">Bringing teams together</h5>
-        <!-- <img class="landing-image" src="./media/thomas-lefebvre-3950.jpg"/> -->
-        <a class="waves-effect waves-light btn" href="#modal-signup">Get Started</a>
-      </div>
-    </div>
+	  <div  class="login-page">
+	    <div class="landing-background">
+	      <div class="landing-focus">
+	        <h1 class="landing-title">Jello</h1>
+	        <h5 class="landing-tagline">Bringing teams together</h5>
+	        <a class="waves-effect waves-light btn" href="#modal-signup">Get Started</a>
+	      </div>
+	    </div>
+
 
 
     <div id="modal-signup" class="modal modal-signup">
@@ -44,15 +45,28 @@
     <div id="modal-login" class="modal modal-login">
       <div class="modal-content">
         <form class="login-account  center-align">
-          <input class="user-email" type="email" name="" placeholder="Email" required>
-          <input class="user-password" type="password" placeholder="Password" required>
+          <input class="login-email" type="email" name="" placeholder="Email" required>
+          <input class="login-password" type="password" placeholder="Password" required>
           <button class='btn' type="submit" name="button">Login</button>
         </form>
       </div>
     </div>
+
+
+
+	</div>
+	<div class="project-page row">
+
+	</div>
+	<script id="project-template" type="text/x-handlebars-template">
+            <div class="card project-card col s12 m4 l3">
+              <div class="card-image project-image">
+                <img src={{image_url}}>
+                <span class="card-title flow-text">{{name}}</span>
+              </div>
+            </div>
+	</script>
   </main>
-
-
 
   <footer class="page-footer footer-copyright teal">
     <!-- <button class="btn testbutton" type="button" name="button">Get test</button> -->
@@ -61,6 +75,7 @@
     </div>
   </footer>
   <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.10/handlebars.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.99.0/js/materialize.min.js"></script>
   <script src="app.js" charset="utf-8"></script>
 </body>
