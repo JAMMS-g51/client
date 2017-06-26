@@ -2,24 +2,6 @@ const postURL = 'http://localhost:3000/api/v1/users';
 const loginURL = 'http://localhost:3000/api/v1/auth/login';
 $(appReady);
 
-let projects = [
-	{
-		name: 'Project1',
-		image: 'https://www.petfinder.com/wp-content/uploads/2012/11/91615172-find-a-lump-on-cats-skin-632x475.jpg'
-	},
-	{
-		name: 'Project2',
-		image: 'https://www.petfinder.com/wp-content/uploads/2012/11/91615172-find-a-lump-on-cats-skin-632x475.jpg'
-	},
-	{
-		name: 'Project3',
-		image: 'https://www.petfinder.com/wp-content/uploads/2012/11/91615172-find-a-lump-on-cats-skin-632x475.jpg'
-	},
-	{
-		name: 'Project4',
-		image: 'https://www.petfinder.com/wp-content/uploads/2012/11/91615172-find-a-lump-on-cats-skin-632x475.jpg'
-	}
-];
 function appReady() {
 	checkLoggedIn();
 }
@@ -64,14 +46,19 @@ function initializeSignUp() {
 
 
 function initializeLogin() {
-  $('.user-login').submit(function(event) {
+  $('.login-account').submit(function(event) {
     event.preventDefault();
     const loginInfo = getLoginInfo();
+    console.log(loginInfo);
     $.post(loginURL, loginInfo).then(response => {
       console.log(response);
+      localStorage.token = response.token;
+      localStorage.user_id = response.id;
     })
   });
 }
+
+
 function getLoginPage() {
 	initializeSignUp();
 	initializeLogin();
@@ -104,3 +91,16 @@ function getLoginInfo() {
 function initModals() {
   $('.modal').modal();
 }
+
+// function getProjects(id){
+//   if(localStorage.token && localStorage.user_id){
+//     return $.get({
+//       url: `${postURL}/${localStorage.user_id}/project`,
+//       headers: {
+//         Authorization: `Bearer ${localStorage.token}`
+//      }
+//    }).then(response => {
+//      console.log(response);
+//    });
+//   }
+// }
