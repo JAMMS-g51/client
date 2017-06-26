@@ -1,0 +1,51 @@
+body {
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+}
+
+main {
+  flex: 1 0 auto;
+}
+
+.brand-logo {
+  margin-left: 5vw;
+  font-family: futura;
+}
+
+.landing-background {
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+  background-image: url("media/thomas-lefebvre-3950.jpg");
+  margin: 2% 0 2% 0;
+  width: 100vw;
+  height: 75vh;
+  background-size: 100% auto;
+  background-repeat: no-repeat;
+}
+
+.landing-focus {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.landing-title {
+  margin-top: 10vw;
+  font-family: 'Julius Sans One', sans-serif;
+  margin-bottom: 0;
+}
+
+.landing-tagline {
+  margin-bottom: 10vw;
+  font-family: 'Oswald', sans-serif;
+}
+
+.modal-signup {
+  width: 40%;
+}
+
+.modal-login {
+  width: 40%;
+}
