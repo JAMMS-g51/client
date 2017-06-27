@@ -7,7 +7,7 @@ function appReady() {
 
 function getProject(id) {
   console.log('working');
-  $.get('http://localhost:3000/api/v1/project/1').then(project => {
+  $.get('https://jello-api.herokuapp.com/api/v1/project/1').then(project => {
     console.log(project);
     displayGroups(project.groupings);
   })
