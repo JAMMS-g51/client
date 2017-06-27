@@ -59,6 +59,16 @@ main {
 .project-name {
 	align-self: center;
 }
+.project-card {
+  height: 30vh;
+}
+.card-image {
+  height: 100%;
+}
+img.project-image {
+  height: 100%;
+  object-fit: cover;
+}
 
 /*.project-page{
 	display: flex;
