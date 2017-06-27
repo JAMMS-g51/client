@@ -16,7 +16,13 @@ function checkLoggedIn() {
 }
 
 function getUserProjects(userId) {
-	$.get(`${postURL}/${userId}/project`).then(projects => {
+	return $.get({
+			url: `${postURL}/${userId}/project`,
+			headers: {
+				Authorization: `Bearer ${localStorage.token}`
+			}
+		}).then(projects => {
+			console.log(projects);
 		displayProjects(projects);
 	});
 }
@@ -92,7 +98,7 @@ function initModals() {
   $('.modal').modal();
 }
 
-// function getProjects(id){
+// function verification(){
 //   if(localStorage.token && localStorage.user_id){
 //     return $.get({
 //       url: `${postURL}/${localStorage.user_id}/project`,
