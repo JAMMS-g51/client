@@ -7,8 +7,9 @@ body {
 main {
   flex: 1 0 auto;
 }
+
 .login-page {
-	display: none;
+  display: none;
 }
 
 .brand-logo {
@@ -52,57 +53,29 @@ main {
 .modal-login {
   width: 40%;
 }
+
 .page-footer {
-	min-height: 60px;
+  min-height: 60px;
 }
 
 .project-name {
-	align-self: center;
+  align-self: center;
 }
+
 .project-card {
   height: 30vh;
 }
+
 .card-image {
   height: 100%;
 }
+
 img.project-image {
   height: 100%;
   object-fit: cover;
 }
 
-/*.project-page{
-	display: flex;
-	flex-direction: row;
-}*/
-
-/*@media only screen and (max-width: 375px) {
-	.project-card {
-		width: 100vw;
-		height: auto;
-		margin: 1vh 0 1vh 0;
-	}
-	.project-page{
-		display: flex;
-		flex-direction: column;
-	}
+p {
+  background: white;
+  border: 1px solid black;
 }
-@media only screen and (max-width: 700px) {
-	.project-card {
-		width: 20vw;
-		/*margin: 1vw;*/
-	}
-	.project-page{
-		display: flex;
-		flex-direction: row;
-	}
-}
-@media only screen and (min-width: 701px) {
-	.project-card {
-		width: 31vw;
-		margin: 1vw;
-	}
-	.project-page{
-		display: flex;
-		flex-direction: row;
-	}
-}*/
