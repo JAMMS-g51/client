@@ -75,7 +75,12 @@ img.project-image {
   object-fit: cover;
 }
 
-p {
-  background: white;
+.story-title {
+  background: #e8eda1;
   border: 1px solid black;
+  border-radius: 8px;
+  padding: 10px;
+}
+.grouping-card {
+	padding: 3%;
 }
