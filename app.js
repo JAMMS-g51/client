@@ -43,6 +43,18 @@ function initializeSignUp() {
     $.post(postURL, userInfo)
       .then(function(result) {
         console.log(result);
+				let loginInfo = {
+					email: userInfo.email,
+					password: userInfo.password
+				};
+				$.post(loginURL, loginInfo).then(response => {
+					console.log(response);
+					localStorage.token = response.token;
+					localStorage.user_id = response.id;
+					if(localStorage.token){
+						window.location = 'index.html';
+					}
+				});
       })
       .catch(function(result) {
         console.log(result);
@@ -60,6 +72,9 @@ function initializeLogin() {
       console.log(response);
       localStorage.token = response.token;
       localStorage.user_id = response.id;
+			if(localStorage.token){
+				window.location = 'index.html';
+			}
     })
   });
 }
