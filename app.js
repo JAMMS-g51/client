@@ -1,5 +1,5 @@
-const postURL = 'https://jello-db.herokuapp.com/api/v1/users';
-const loginURL = 'https://jello-db.herokuapp.com/auth/login';
+const postURL = 'https://jello-api.herokuapp.com/api/v1/users';
+const loginURL = 'https://jello-api.herokuapp.com/auth/login';
 $(appReady);
 
 function appReady() {
