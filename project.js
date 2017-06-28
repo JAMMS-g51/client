@@ -6,11 +6,16 @@ function appReady() {
 }
 
 function getProject(id) {
-  console.log('working');
   $.get('http://localhost:3000/api/v1/project/1').then(project => {
     console.log(project);
+	createNameInHeader(project.name);
     displayGroups(project.groupings);
+	initAddStoryHandler();
   })
+}
+
+function createNameInHeader(name) {
+	$('.project-name').text(name);
 }
 
 function displayGroups(groupings) {
@@ -100,4 +105,11 @@ function appendComments(story) {
 		let content = $(`<p class="comment">${comment.content}</p>`);
 		$('.comment-content').append(content);
 	})
+}
+
+
+function initAddStoryHandler() {
+	$('.grouping-add-story').click((event) => {
+		console.log($(event.target).parent().parent());
+	});
 }

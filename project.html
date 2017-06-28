@@ -15,7 +15,6 @@
   <nav>
     <div class="nav-wrapper teal lighten-2">
       <a href="#" class="brand-logo left">Jello</a>
-
       <ul id="nav-mobile" class="right">
         <li><a href="#modal-login">Login</a></li>
 
@@ -23,6 +22,8 @@
     </div>
   </nav>
   <main class="container-fluid">
+
+		<h4 class="center project-name"></h4>
 	  <div class="story-modal">
 
 	  </div>
@@ -35,8 +36,14 @@
       <div class="card grouping-card">
         <div class="grouping-header">
           <span class="grouping-card-title">{{grouping_name}}</span>
+		  <i class="fa fa-plus-square-o grouping-add-story right" aria-hidden="true"></i>
         </div>
         <div id={{grouping_id}}>
+			<form>
+				<input type="text" size="35"/>
+				<input type="submit" class="waves-effect waves-light btn">Add Story</input>
+				<i class="fa fa-ban" aria-hidden="true"></i>
+			</form>
 
         </div>
       </div>
@@ -44,6 +51,10 @@
 
   <script id="story-template" type="text/x-handlebars-template">
     <p class="story-title" id={{story_id}}>{{story_name}}</p>
+  </script>
+
+  <script id="story-add-template" type="text/x-handlebars-template">
+
   </script>
 
   <script id="story-expanded-template" id="story-expanded-template" type="text/x-handlebars-template">

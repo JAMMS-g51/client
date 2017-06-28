@@ -81,10 +81,9 @@ img.project-image {
   /*border: 1px solid black;*/
   border-radius: 3px;
   padding: 10px;
-
   box-shadow: 1px 1px 6px #3a3a3a;
 }
-
+h
 .story-title:hover {
 	box-shadow: 3px 3px 6px #3a3a3a;
 	background: linear-gradient(#c9d9db, #efefef);
@@ -98,7 +97,7 @@ img.project-image {
 }
 .grouping-card {
 	padding: 3%;
-	background: linear-gradient(#7b6a96,rgba(119, 94, 135,.8))
+	background: linear-gradient(#ddcce5, rgba(191, 177, 198, .8))
 	/*background-color: #7b6a96;*/
 }
 
@@ -128,8 +127,6 @@ img.project-image {
 	display: flex;
 	flex-direction: row;
 	align-items: center;
-
-
 }
 
 .story-expanded-title {
@@ -141,26 +138,18 @@ img.project-image {
 
 .fa-times-circle {
 	font-size: 30px;
-	/*justify-content: flex-end;
-	align-self: flex-end;	*/
 }
 .fa-times-circle:hover {
 	font-size: 35px;
 	cursor: pointer;
-	/*justify-content: flex-end;
-	align-self: flex-end;	*/
 }
 
-/*.link-content {
-	padding: 10%;
-}
-.list-content {
-	padding: 10%;
-}*/
 .comment-content {
 	padding: 5%;
 }
-
+.story-content {
+	/*overflow-y: scroll;*/
+}
 
 .story-content ul {
 	font-size: 25px;
@@ -182,7 +171,6 @@ img.project-image {
 	width: 54vw;
 	max-width: 60vw;
 	margin: 0;
-	/*background-color: black;*/
 	font-family: 'Oswald', sans-serif;
 }
 
@@ -199,4 +187,18 @@ img.project-image {
 .grouping-card-title {
 	font-family: 'Oswald', sans-serif;
 	font-size: 30px;
+	text-shadow: 2px 1px 3px gray;
+}
+
+.grouping-add-story {
+	font-size: 30px;
+	padding-top: 8px;
+}
+.grouping-add-story:hover {
+	font-size: 35px;
+	cursor: pointer;
+}
+
+.project-name {
+	font-family: 'Oswald', sans-serif;
 }
