@@ -3,15 +3,20 @@ const loginURL = 'http://localhost:3000/api/v1/auth/login';
 $(appReady);
 
 function appReady() {
-	$('.loader').hide();
+	//$('.loader').hide();
 	checkLoggedIn();
+	logout();
 }
 
 
 function checkLoggedIn() {
 	if(localStorage.user_id) {
 		getUserProjects(localStorage.user_id);
+		$('.login-word').hide();
+		$('.logout-word').show();
 	} else {
+		$('.login-word').show();
+		$('.logout-word').hide();
 		getLoginPage();
 	}
 }
@@ -115,11 +120,17 @@ function initModals() {
 }
 
 function loading() {
-	$('.loader').show();
+	$('.loader').css('display', 'flex');
 	setTimeout(() => {
 		window.location = 'index.html';
 	}, 2000);
 
+}
+
+function logout(){
+	$('.logout-word').on('click', () => {
+		localStorage.clear();
+	});
 }
 
 // function verification(){

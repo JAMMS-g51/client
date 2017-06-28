@@ -1,7 +1,7 @@
 
 
 .overlay{
-  display: flex;
+  display: none;
   justify-content: center;
   align-items: center;
     opacity:0.8;
