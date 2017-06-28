@@ -6,6 +6,7 @@ function appReady() {
 	//$('.loader').hide();
 	checkLoggedIn();
 	logout();
+	createProject();
 }
 
 
@@ -28,8 +29,8 @@ function getUserProjects(userId) {
 				Authorization: `Bearer ${localStorage.token}`
 			}
 		}).then(projects => {
-			console.log(projects);
 		displayProjects(projects);
+		displayCreateProject();
 	});
 }
 
@@ -42,19 +43,51 @@ function displayProjects(projects) {
 	});
 }
 
+function displayCreateProject() {
+		const source = $('#project-create-template').html();
+		const template = Handlebars.compile(source);
+		const html = template();
+		$('.project-page').append(html);
+
+		$('.project-page').on('click','.create-project-clicker', () => {
+			$('#add-project-modal').modal('open');
+
+		})
+}
+
+function createProject(){
+	$('.project-page').on('click', '.create-project-submission', (event) => {
+		event.preventDefault();
+		let projectInfo = getProjectInfo();
+		$.post('http://localhost:3000/api/v1/project', projectInfo)
+		.then(results => {
+			let userProjectInfo = {
+				users_id: localStorage.user_id,
+				project_id: results[0].id
+			}
+		$.post('http://localhost:3000/api/v1/user_project', userProjectInfo).then(results => {
+			//console.log(results);
+			//redirect to that project page with the project id
+			//window.location = 'project.html'
+		});
+		})
+		.catch(error => {
+			Materialize.toast(error.responseJSON.message, 3000);
+		});
+	})
+}
+
 function initializeSignUp() {
   $('.create-account').submit(function(event) {
     event.preventDefault();
     const userInfo = getSignUpInfo();
     $.post(postURL, userInfo)
       .then(function(result) {
-        console.log(result);
 				let loginInfo = {
 					email: userInfo.email,
 					password: userInfo.password
 				};
 				$.post(loginURL, loginInfo).then(response => {
-					console.log(response);
 					localStorage.token = response.token;
 					localStorage.user_id = response.id;
 					if(localStorage.token){
@@ -62,8 +95,8 @@ function initializeSignUp() {
 					}
 				});
       })
-      .catch(function(result) {
-        Materialize.toast(result.responseJSON.message, 3000);
+      .catch(function(error) {
+        Materialize.toast(error.responseJSON.message, 3000);
       });
   })
 }
@@ -73,16 +106,14 @@ function initializeLogin() {
   $('.login-account').submit(function(event) {
     event.preventDefault();
     const loginInfo = getLoginInfo();
-    console.log(loginInfo);
     $.post(loginURL, loginInfo).then(response => {
-      console.log(response);
       localStorage.token = response.token;
       localStorage.user_id = response.id;
 			if(localStorage.token){
 				loading();
 			}
-    }).catch(response => {
-			Materialize.toast(response.responseJSON.message, 3000);
+    }).catch(error => {
+			Materialize.toast(error.responseJSON.message, 3000);
 		})
   });
 }
@@ -93,6 +124,15 @@ function getLoginPage() {
 	initializeLogin();
 	initModals();
 	$('.login-page').css('display', 'block');
+}
+
+function getProjectInfo() {
+	let projectName = $('.project-name').val();
+	let projectImgUrl = $('.add-project-image').val();
+	return {
+		name: projectName,
+		image_url: projectImgUrl
+	};
 }
 
 function getSignUpInfo() {
@@ -125,7 +165,7 @@ function loading() {
 	$('.loader').css('display', 'flex');
 	setTimeout(() => {
 		window.location = 'index.html';
-	}, 2000);
+	}, 1000);
 
 }
 

@@ -7,6 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <link href="https://fonts.googleapis.com/css?family=Julius+Sans+One|Oswald:300" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.99.0/css/materialize.min.css">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
   <link rel="stylesheet" href="test.css">
 </head>
@@ -82,6 +83,26 @@
             </div>
           </a>
 	</script>
+  <script id="project-create-template" type="text/x-handlebars-template">
+          <a class="create-project-clicker" href="#add-project-modal">
+            <div class="card project-card col s12 m4 l3">
+              <div class="card-image">
+                <img src="http://www.freeiconspng.com/uploads/add-icon--line-iconset--iconsmind-29.png">
+                <span class="card-title flow-text grey-text">Create New Project</span>
+              </div>
+            </div>
+          </a>
+          <div id="add-project-modal" class="modal">
+   <div class="modal-content">
+     <h4>Add project</h4>
+    <form>
+      <input class="project-name" placeholder="Project Name">
+      <input class="add-project-image" placeholder="Project Image URL">
+      <button class='btn modal-action create-project-submission' type="submit" name="button">Create Project</button>
+    </form>
+   </div>
+ </div>
+  </script>
   </main>
 
   <footer class="page-footer footer-copyright teal">
