@@ -76,13 +76,29 @@ img.project-image {
 }
 
 .story-title {
-  background: #e8eda1;
-  border: 1px solid black;
-  border-radius: 8px;
+  /*background: #e3f5f7;*/
+  background: linear-gradient(#e3f5f7, white);
+  /*border: 1px solid black;*/
+  border-radius: 3px;
   padding: 10px;
+  box-shadow: 1px 1px 6px #3a3a3a;
+}
+h
+.story-title:hover {
+	box-shadow: 3px 3px 6px #3a3a3a;
+	background: linear-gradient(#c9d9db, #efefef);
+	cursor: pointer;
+}
+
+.story-title:active {
+	background: none;
+	background-color: #f2f2f2;
+	box-shadow: .1px .1px 1px #3a3a3a;
 }
 .grouping-card {
 	padding: 3%;
+	background: linear-gradient(#ddcce5, rgba(191, 177, 198, .8))
+	/*background-color: #7b6a96;*/
 }
 
 .story-modal {
@@ -111,8 +127,6 @@ img.project-image {
 	display: flex;
 	flex-direction: row;
 	align-items: center;
-
-
 }
 
 .story-expanded-title {
@@ -124,34 +138,26 @@ img.project-image {
 
 .fa-times-circle {
 	font-size: 30px;
-	/*justify-content: flex-end;
-	align-self: flex-end;	*/
 }
 .fa-times-circle:hover {
 	font-size: 35px;
 	cursor: pointer;
-	/*justify-content: flex-end;
-	align-self: flex-end;	*/
 }
 
-/*.link-content {
-	padding: 10%;
-}
-.list-content {
-	padding: 10%;
-}*/
 .comment-content {
 	padding: 5%;
 }
+.story-content {
+	/*overflow-y: scroll;*/
+}
 
-
-ul {
+.story-content ul {
 	font-size: 25px;
 	margin-top: 0;
 	font-family: 'Julius Sans One', sans-serif;
 	list-style-type: square;
 }
-li {
+.story-content li {
 	font-size: 18px;
 	font-family: 'Oswald', sans-serif;
 	list-style-type: square !important;
@@ -165,7 +171,6 @@ li {
 	width: 54vw;
 	max-width: 60vw;
 	margin: 0;
-	/*background-color: black;*/
 	font-family: 'Oswald', sans-serif;
 }
 
@@ -176,4 +181,24 @@ li {
 .comments-title {
 	font-family: 'Oswald', sans-serif;
 	margin: 0;
+}
+
+
+.grouping-card-title {
+	font-family: 'Oswald', sans-serif;
+	font-size: 30px;
+	text-shadow: 2px 1px 3px gray;
+}
+
+.grouping-add-story {
+	font-size: 30px;
+	padding-top: 8px;
+}
+.grouping-add-story:hover {
+	font-size: 35px;
+	cursor: pointer;
+}
+
+.project-name {
+	font-family: 'Oswald', sans-serif;
 }
