@@ -84,3 +84,40 @@ img.project-image {
 .grouping-card {
 	padding: 3%;
 }
+
+.story-modal {
+	width: 60vw;
+	height: 80vh;
+	color: white;
+	background-color: rgba(0, 0, 0, 0.8);
+	position: absolute;
+	left: 20vw;
+	top: 10vh;
+	display: none;
+	z-index: 10000000000;
+	padding: 0;
+
+}
+
+.story-expanded-header {
+	height: 10%;
+	width: 60vw;
+	background-color: grey;
+	margin: 0;
+	padding: 0;
+	display: flex;
+	justify-content: space-around;
+
+}
+
+.story-expanded-title {
+	margin: 0;
+	padding: 0;
+	width: 60%;
+}
+
+.fa-times-circle {
+	font-size: 30px;
+	/*justify-content: flex-end;
+	align-self: flex-end;	*/
+}
