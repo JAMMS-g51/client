@@ -89,35 +89,91 @@ img.project-image {
 	width: 60vw;
 	height: 80vh;
 	color: white;
-	background-color: rgba(0, 0, 0, 0.8);
+	background-color: rgba(30, 30, 30, 0.9);
 	position: absolute;
 	left: 20vw;
 	top: 10vh;
 	display: none;
 	z-index: 10000000000;
 	padding: 0;
+	margin: 0;
+	overflow-y: scroll;
+	overflow-x: hidden;
 
 }
 
 .story-expanded-header {
 	height: 10%;
 	width: 60vw;
-	background-color: grey;
+	background: linear-gradient(rgba(30,30,30,.6),rgba(0,0,0,.3));
 	margin: 0;
 	padding: 0;
 	display: flex;
-	justify-content: space-around;
+	flex-direction: row;
+	align-items: center;
+
 
 }
 
 .story-expanded-title {
-	margin: 0;
+	margin: 0 0 0 5%;
 	padding: 0;
-	width: 60%;
+	width: 85%;
+	font-family: 'Oswald', sans-serif;
 }
 
 .fa-times-circle {
 	font-size: 30px;
 	/*justify-content: flex-end;
 	align-self: flex-end;	*/
+}
+.fa-times-circle:hover {
+	font-size: 35px;
+	cursor: pointer;
+	/*justify-content: flex-end;
+	align-self: flex-end;	*/
+}
+
+/*.link-content {
+	padding: 10%;
+}
+.list-content {
+	padding: 10%;
+}*/
+.comment-content {
+	padding: 5%;
+}
+
+
+ul {
+	font-size: 25px;
+	margin-top: 0;
+	font-family: 'Julius Sans One', sans-serif;
+	list-style-type: square;
+}
+li {
+	font-size: 18px;
+	font-family: 'Oswald', sans-serif;
+	list-style-type: square !important;
+	list-style-position: inside;
+
+
+}
+
+.link-list {
+	padding: 1vw 3vw 0 3vw;
+	width: 54vw;
+	max-width: 60vw;
+	margin: 0;
+	/*background-color: black;*/
+	font-family: 'Oswald', sans-serif;
+}
+
+.link-content {
+	font-size: 22px;
+}
+
+.comments-title {
+	font-family: 'Oswald', sans-serif;
+	margin: 0;
 }

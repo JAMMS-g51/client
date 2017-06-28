@@ -57,4 +57,47 @@ function createStoryModal(story) {
 	const html = template(context);
 	$('.story-modal').append(html);
 	$('.story-modal').css('display', 'flex')
+	appendLists(story);
+	appendLinks(story);
+	appendComments(story);
+
+    initStoryModal();
+}
+
+
+function initStoryModal() {
+	$('#modal-close').click(() => {
+		$('.story-modal').hide();
+	})
+}
+
+function appendLists(story) {
+	story.lists.forEach(list => {
+		let newList = $(`<ul class="story-list-title">${list.name}</ul>`)
+		list.items.forEach(item => {
+			newList.append($(`<li class="story-list">${item.content}</li>`))
+		});
+		$('.list-content').append(newList);
+	});
+}
+
+function appendLinks(story) {
+	story.links.forEach(link => {
+		console.log(link);
+		let title;
+		if(link.title.length > 0) {
+			title = link.title;
+		} else {
+			title = link.href;
+		}
+		let newLink = $(`<a href=${link.href}>${title}</a></br>`);
+		$('.link-content').append(newLink)
+	})
+}
+
+function appendComments(story) {
+	story.comments.forEach(comment => {
+		let content = $(`<p class="comment">${comment.content}</p>`);
+		$('.comment-content').append(content);
+	})
 }
