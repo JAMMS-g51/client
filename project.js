@@ -32,10 +32,29 @@ function displayGroups(groupings) {
 
 function renderStory(story, grouping_id) {
   let context = {
-    story_name: story.name
+    story_name: story.name,
+	story_id: `story_${story.id}`
   }
   const source = $("#story-template").html();
   const template = Handlebars.compile(source);
   const html = template(context);
-  $(`#${grouping_id}`).append(html);
+  $(`#${grouping_id}`).append(html)
+  $(`#story_${story.id}`).click(() => {
+	  console.log(`#story_${story.id}`);
+	  createStoryModal(story);
+  })
+}
+
+
+function createStoryModal(story) {
+
+	$('.story-modal').empty();
+	let context = {
+		story_name: story.name
+	}
+	const source = $("#story-expanded-template").html();
+	const template = Handlebars.compile(source);
+	const html = template(context);
+	$('.story-modal').append(html);
+	$('.story-modal').css('display', 'flex')
 }

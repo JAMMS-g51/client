@@ -7,6 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <link href="https://fonts.googleapis.com/css?family=Julius+Sans+One|Oswald:300" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.99.0/css/materialize.min.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
   <link rel="stylesheet" href="style.css">
 </head>
 
@@ -22,6 +23,9 @@
     </div>
   </nav>
   <main class="container-fluid">
+	  <div class="story-modal">
+
+	  </div>
     <div class="grouping-page row">
 
     </div>
@@ -38,9 +42,20 @@
       </div>
   </script>
 
-
   <script id="story-template" type="text/x-handlebars-template">
-    <p class="story-title">{{story_name}}</p>
+    <p class="story-title" id={{story_id}}>{{story_name}}</p>
+  </script>
+
+  <script id="story-expanded-template" id="story-expanded-template" type="text/x-handlebars-template">
+   <div class="story-details">
+	   <div class="story-expanded-header">
+			<h5 class="story-expanded-title">{{story_name}}</h5>
+			<i class="fa fa-times-circle" aria-hidden="true"></i>
+	   </div>
+		<div class="story-content">
+
+		</div>
+   </div>
   </script>
 
 
