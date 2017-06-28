@@ -5,8 +5,6 @@ function appReady() {
   let userProjectId = getUserProjectId();
   console.log(userProjectId);
   getProject(userProjectId);
-
-
 }
 
 function getProject(id) {
@@ -22,7 +20,7 @@ function getProject(id) {
 	}).then(projects => {
     createNameInHeader(projects.name);
       displayGroups(projects.groupings);
-    initAddStoryHandler();
+    initGroupingEventHandlers()
   }).catch(error => {
     console.log(error);
   });
@@ -37,6 +35,12 @@ function getUserProjectId() {
   return id
 }
 
+
+function initGroupingEventHandlers() {
+	initAddStoryHandler();
+	initCloseFieldHandler();
+	initStorySubmitHandler();
+}
 function createNameInHeader(name) {
 	$('.project-name').text(name);
 }
@@ -68,7 +72,6 @@ function renderStory(story, grouping_id) {
   const html = template(context);
   $(`#${grouping_id}`).append(html)
   $(`#story_${story.id}`).click(() => {
-	  console.log(`#story_${story.id}`);
 	  createStoryModal(story);
   })
 }
@@ -100,6 +103,7 @@ function initStoryModal() {
 }
 
 function appendLists(story) {
+	if(!story.lists) { return; }
 	story.lists.forEach(list => {
 		let newList = $(`<ul class="story-list-title">${list.name}</ul>`)
 		list.items.forEach(item => {
@@ -110,8 +114,8 @@ function appendLists(story) {
 }
 
 function appendLinks(story) {
+	if(!story.links) { return; }
 	story.links.forEach(link => {
-		console.log(link);
 		let title;
 		if(link.title.length > 0) {
 			title = link.title;
@@ -124,6 +128,7 @@ function appendLinks(story) {
 }
 
 function appendComments(story) {
+	if(!story.comments) { return; }
 	story.comments.forEach(comment => {
 		let content = $(`<p class="comment">${comment.content}</p>`);
 		$('.comment-content').append(content);
@@ -133,6 +138,29 @@ function appendComments(story) {
 
 function initAddStoryHandler() {
 	$('.grouping-add-story').click((event) => {
-		console.log($(event.target).parent().parent());
+		event.preventDefault();
+		$(event.target).parent().parent().find('.add-story-form').show();
+	});
+}
+
+function initCloseFieldHandler() {
+	$('.story-cancel').click((event) => {
+		$(event.target).parent().parent().find('.add-story-form').hide();
+		$(event.target).parent().find('input').val('');
+	})
+}
+
+function initStorySubmitHandler() {
+	$('.story-submit').click((event) => {
+		event.preventDefault();
+		let grouping_id = $(event.target).parent().parent().attr('id');
+		let $storyName = $(event.target).parent().find('input')
+		let story = {
+			name: $storyName.val(),
+			id: 100
+		}
+		$storyName.val('')
+		$(event.target).parent().parent().find('.add-story-form').hide();
+		renderStory(story, grouping_id);
 	});
 }

@@ -38,12 +38,18 @@
           <span class="grouping-card-title">{{grouping_name}}</span>
 		  <i class="fa fa-plus-square-o grouping-add-story right" aria-hidden="true"></i>
         </div>
+		<!-- <div class="input-field col s12">
+			<textarea id="message" class="materialize-textarea"></textarea>
+			<label for="message">Message</label>
+		</div> -->
         <div id={{grouping_id}}>
-			<form>
-				<input type="text" size="35"/>
-				<input type="submit" class="waves-effect waves-light btn">Add Story</input>
-				<i class="fa fa-ban" aria-hidden="true"></i>
+			<form class="add-story-form">
+				<input type="text" size="35" placeholder="Add story here"/>
+				<!-- <input  type="submit" class="story-submit"/> -->
+				<i class="fa fa-check story-submit"aria-hidden="true"></i>
+				<i class="fa fa-ban story-cancel" aria-hidden="true"></i>
 			</form>
+
 
         </div>
       </div>
