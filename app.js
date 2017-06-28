@@ -3,6 +3,7 @@ const loginURL = 'http://localhost:3000/api/v1/auth/login';
 $(appReady);
 
 function appReady() {
+	$('.loader').hide();
 	checkLoggedIn();
 }
 
@@ -52,7 +53,7 @@ function initializeSignUp() {
 					localStorage.token = response.token;
 					localStorage.user_id = response.id;
 					if(localStorage.token){
-						window.location = 'index.html';
+						loading();
 					}
 				});
       })
@@ -73,7 +74,7 @@ function initializeLogin() {
       localStorage.token = response.token;
       localStorage.user_id = response.id;
 			if(localStorage.token){
-				window.location = 'index.html';
+				loading();
 			}
     })
   });
@@ -111,6 +112,14 @@ function getLoginInfo() {
 
 function initModals() {
   $('.modal').modal();
+}
+
+function loading() {
+	$('.loader').show();
+	setTimeout(() => {
+		window.location = 'index.html';
+	}, 2000);
+
 }
 
 // function verification(){
