@@ -63,7 +63,7 @@ function initializeSignUp() {
 				});
       })
       .catch(function(result) {
-        console.log(result);
+        Materialize.toast(result.responseJSON.message, 3000);
       });
   })
 }
@@ -81,7 +81,9 @@ function initializeLogin() {
 			if(localStorage.token){
 				loading();
 			}
-    })
+    }).catch(response => {
+			Materialize.toast(response.responseJSON.message, 3000);
+		})
   });
 }
 
