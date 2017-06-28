@@ -2,16 +2,39 @@ $(appReady);
 
 
 function appReady() {
-  getProject(1);
+  let userProjectId = getUserProjectId();
+  console.log(userProjectId);
+  getProject(userProjectId);
+
+
 }
 
 function getProject(id) {
-  $.get('http://localhost:3000/api/v1/project/1').then(project => {
-    console.log(project);
-	createNameInHeader(project.name);
-    displayGroups(project.groupings);
-	initAddStoryHandler();
-  })
+  return $.get(`http://localhost:3000/api/v1/user_project/${id}`)
+    .then(userProjects => {
+      console.log(userProjects);
+      return $.get({
+          url: `http://localhost:3000/api/v1/user/${userProjects[0].users_id}/project/${userProjects[0].project_id}`,
+          headers: {
+            Authorization: `Bearer ${localStorage.token}`
+          }
+
+	}).then(projects => {
+    createNameInHeader(projects.name);
+      displayGroups(projects.groupings);
+    initAddStoryHandler();
+  }).catch(error => {
+    console.log(error);
+  });
+});
+}
+
+function getUserProjectId() {
+  let currentIndex = window.location.href;
+  let charArray = currentIndex.split('');
+  let index = charArray.indexOf('=') + 1;
+  let id = currentIndex.substring(index);
+  return id
 }
 
 function createNameInHeader(name) {
