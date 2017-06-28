@@ -68,7 +68,7 @@ function createProject(){
 		$.post('http://localhost:3000/api/v1/user_project', userProjectInfo).then(results => {
 			//console.log(results);
 			//redirect to that project page with the project id
-			//window.location = 'project.html'
+			window.location = `project.html?id=${userProjectInfo.project_id}`
 		});
 		})
 		.catch(error => {
