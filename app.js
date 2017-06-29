@@ -82,7 +82,7 @@ function createProject(){
 			console.log(results);
 
 			//redirect to that project page with the project id
-			window.location = `project.html?id=${results[0].id}`
+			projectLoading(results[0].id);
 		});
 		})
 		.catch(error => {
@@ -186,6 +186,13 @@ function loading() {
 		window.location = 'index.html';
 	}, 300);
 
+}
+
+function projectLoading(id) {
+	$('.loader').css('display', 'flex');
+	setTimeout(() => {
+		window.location = `project.html?id=${id}`
+	}, 300);
 }
 
 function logout(){
