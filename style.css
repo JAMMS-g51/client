@@ -237,7 +237,7 @@ h
     height: 100%;
 }
 .project-text-name {
-  z-index: 9000238402;
+  z-index: 900;
 }
 .list-edit {
 	margin-right: 5%;
@@ -261,6 +261,9 @@ h
 	margin: 0 5% 0 0;
 }
 
+.add-modal {
+  z-index: 901;
+}
 
 .delete-story-button-container {
 	display: flex;
