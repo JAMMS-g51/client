@@ -6,7 +6,7 @@ let API_URL = 'https://jello-api.herokuapp.com/api/v1/'
 function getUrl() {
 	API_URL = 'https://jello-api.herokuapp.com/api/v1/';
 		console.log(window.location.href);
-	if(window.location.href == 'http://127.0.0.1:8080/') {
+	if(window.location.href == 'http://127.0.0.1:8080/' || window.location.href == 'http://127.0.0.1:8080/index.html') {
 		API_URL = 'http://localhost:3000/api/v1/';
 	}
 }
@@ -40,7 +40,10 @@ function getUserProjects(userId) {
 		}).then(projects => {
 		displayProjects(projects);
 		displayCreateProject();
-	});
+	}).catch(() => {
+		window.location = '404.html';
+	}
+);
 }
 
 function displayProjects(projects) {
@@ -77,6 +80,7 @@ function createProject(){
 			}
 		$.post(`${API_URL}user_project`, userProjectInfo).then(results => {
 			console.log(results);
+
 			//redirect to that project page with the project id
 			window.location = `project.html?id=${results[0].id}`
 		});
@@ -123,8 +127,10 @@ function initializeLogin() {
 				loading();
 			}
     }).catch(error => {
+			// console.log('something');
+			// console.log(error);
 			Materialize.toast(error.responseJSON.message, 3000);
-		})
+		});
   });
 }
 
@@ -139,6 +145,9 @@ function getLoginPage() {
 function getProjectInfo() {
 	let projectName = $('.project-name').val();
 	let projectImgUrl = $('.add-project-image').val();
+	if(projectImgUrl == ''){
+		projectImgUrl = 'https://source.unsplash.com/random';
+	}
 	return {
 		name: projectName,
 		image_url: projectImgUrl
@@ -175,7 +184,7 @@ function loading() {
 	$('.loader').css('display', 'flex');
 	setTimeout(() => {
 		window.location = 'index.html';
-	}, 1000);
+	}, 300);
 
 }
 

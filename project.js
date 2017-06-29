@@ -11,8 +11,13 @@ function getUrl() {
 function appReady() {
 	initModals()
 	getUrl();
-  	let userProjectId = getUserProjectId();
-  	getProject(userProjectId);
+
+//   	let userProjectId = getUserProjectId();
+//   	getProject(userProjectId);
+  	let projectId = getProjectId();
+  	console.log(projectId);
+  	getProject(projectId);
+
 }
 
 
@@ -25,22 +30,25 @@ function getProject(id) {
           headers: {
             Authorization: `Bearer ${localStorage.token}`
           }
-
 	}).then(projects => {
+
 		console.log(projects);
     createNameInHeader(projects.name);
 	initAddGroupingButton(projects.id);
       displayGroups(projects.groupings);
+
     initGroupingEventHandlers();
 	findGroupsOnPage();
 	initRemoveColumnButton();
+
   }).catch(error => {
-    console.log(error);
+    //console.log(error);
+    window.location = '404.html';
   });
 });
 }
 
-function getUserProjectId() {
+function getProjectId() {
   let currentIndex = window.location.href;
   let charArray = currentIndex.split('');
   let index = charArray.indexOf('=') + 1;
