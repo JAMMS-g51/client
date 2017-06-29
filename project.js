@@ -1,23 +1,35 @@
 $(appReady);
 
+let API_URL = 'https://jello-api.herokuapp.com/api/v1/'
 
+function getUrl() {
+	API_URL = 'https://jello-api.herokuapp.com/api/v1/';
+	console.log(window.location.origin);
+	if(window.location.origin == 'http://127.0.0.1:8080') {
+		API_URL = 'http://localhost:3000/api/v1/';
+	}
+}
 function appReady() {
-  let userProjectId = getUserProjectId();
-  console.log(userProjectId);
-  getProject(userProjectId);
+	getUrl();
+  	let userProjectId = getUserProjectId();
+  	console.log(userProjectId);
+  	getProject(userProjectId);
 }
 
+
+
 function getProject(id) {
-  return $.get(`http://localhost:3000/api/v1/user_project/${id}`)
+  return $.get(`${API_URL}user_project/${id}`)
     .then(userProjects => {
       console.log(userProjects);
       return $.get({
-          url: `http://localhost:3000/api/v1/user/${userProjects[0].users_id}/project/${userProjects[0].project_id}`,
+          url: `${API_URL}user/${userProjects[0].users_id}/project/${userProjects[0].project_id}`,
           headers: {
             Authorization: `Bearer ${localStorage.token}`
           }
 
 	}).then(projects => {
+		console.log(projects);
     createNameInHeader(projects.name);
       displayGroups(projects.groupings);
     initGroupingEventHandlers()
@@ -65,7 +77,8 @@ function displayGroups(groupings) {
 function renderStory(story, grouping_id) {
   let context = {
     story_name: story.name,
-	story_id: `story_${story.id}`
+	story_id: `story_${story.id}`,
+	id: story.id
   }
   const source = $("#story-template").html();
   const template = Handlebars.compile(source);
@@ -105,9 +118,10 @@ function initStoryModal() {
 function appendLists(story) {
 	if(!story.lists) { return; }
 	story.lists.forEach(list => {
-		let newList = $(`<ul class="story-list-title">${list.name}</ul>`)
+		let icon = `<i class="fa fa-pencil list-edit" aria-hidden="true"></i>`
+		let newList = $(`<ul class="story-list-title" data-id="${list.id}">${icon}${list.name}</ul>`)
 		list.items.forEach(item => {
-			newList.append($(`<li class="story-list">${item.content}</li>`))
+			newList.append($(`<li class="story-list" data-id="${item.id}">${item.content}</li>`))
 		});
 		$('.list-content').append(newList);
 	});
@@ -122,7 +136,7 @@ function appendLinks(story) {
 		} else {
 			title = link.href;
 		}
-		let newLink = $(`<a href=${link.href}>${title}</a></br>`);
+		let newLink = $(`<a href=${link.href} data-id="${link.id}">${title}</a></br>`);
 		$('.link-content').append(newLink)
 	})
 }
@@ -130,7 +144,7 @@ function appendLinks(story) {
 function appendComments(story) {
 	if(!story.comments) { return; }
 	story.comments.forEach(comment => {
-		let content = $(`<p class="comment">${comment.content}</p>`);
+		let content = $(`<p class="comment" data-id="${comment.id}">${comment.content}</p>`);
 		$('.comment-content').append(content);
 	})
 }
@@ -157,10 +171,14 @@ function initStorySubmitHandler() {
 		let $storyName = $(event.target).parent().find('input')
 		let story = {
 			name: $storyName.val(),
-			id: 100
+			grouping_id: grouping_id
 		}
 		$storyName.val('')
 		$(event.target).parent().parent().find('.add-story-form').hide();
-		renderStory(story, grouping_id);
+		$.post(`${API_URL}story`, story).then(response => {
+			console.log('response');
+			console.log(response);
+			renderStory(response, response.grouping_id);
+		});
 	});
 }
