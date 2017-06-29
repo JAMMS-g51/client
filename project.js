@@ -35,7 +35,7 @@ function getProject(id) {
       initGroupingEventHandlers()
   }).catch(error => {
     //console.log(error);
-    window.location = '400.html';
+    window.location = '404.html';
   });
 });
 }
