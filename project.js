@@ -14,6 +14,7 @@ function appReady() {
   	let projectId = getProjectId();
   	console.log(projectId);
   	getProject(projectId);
+    logout();
 }
 
 
@@ -37,6 +38,8 @@ function getProject(id) {
     //console.log(error);
     window.location = '404.html';
   });
+}).catch(error => {
+  window.location = '404.html';
 });
 }
 
@@ -181,5 +184,13 @@ function initStorySubmitHandler() {
 			console.log(response);
 			renderStory(response, response.grouping_id);
 		});
+	});
+}
+
+function logout(){
+	$('.logout-word').on('click', (event) => {
+    event.preventDefault();
+		localStorage.clear();
+    window.location = 'index.html';
 	});
 }
