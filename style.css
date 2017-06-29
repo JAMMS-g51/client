@@ -82,6 +82,7 @@ img.project-image {
   border-radius: 3px;
   padding: 10px;
   box-shadow: 1px 1px 6px #3a3a3a;
+  overflow: hidden;
 }
 h
 .story-title:hover {
@@ -227,7 +228,6 @@ h
 .add-story-form {
 	display: none;
 }
-
 .layer {
     background-color: rgba(169, 169, 169, 0.7);
     position: absolute;
@@ -236,7 +236,19 @@ h
     width: 100%;
     height: 100%;
 }
-
 .project-text-name {
   z-index: 9000238402;
+}
+.list-edit {
+	margin-right: 5%;
+}
+
+.story-item-header {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+}
+.story-item-menu {
+	font-size: 30px;
+	margin: 0 5% 0 0;
 }

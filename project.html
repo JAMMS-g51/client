@@ -16,8 +16,7 @@
     <div class="nav-wrapper teal lighten-2">
       <a href="#" class="brand-logo left">Jello</a>
       <ul id="nav-mobile" class="right">
-        <li><a href="#modal-login">Login</a></li>
-
+        <li><a href="#modal-login">Logout</a></li>
       </ul>
     </div>
   </nav>
@@ -56,7 +55,7 @@
   </script>
 
   <script id="story-template" type="text/x-handlebars-template">
-    <p class="story-title" id={{story_id}}>{{story_name}}</p>
+    <p class="story-title" data-id="{{id}}"id={{story_id}}>{{story_name}}</p>
   </script>
 
   <script id="story-add-template" type="text/x-handlebars-template">
@@ -64,7 +63,7 @@
   </script>
 
   <script id="story-expanded-template" id="story-expanded-template" type="text/x-handlebars-template">
-   <div class="story-details">
+   <div class="story-details" data-id="{{story_id}}">
 	   <div class="story-expanded-header">
 			<h5 class="story-expanded-title">{{story_name}}</h5>
 			<i class="fa fa-times-circle" id="modal-close"aria-hidden="true"></i>
@@ -72,17 +71,28 @@
 		<div class="story-content">
 			<div class="row link-list">
 				<div class="list-content col s6">
-					<h4>Lists</h4>
+					<div class="story-item-header">
+
+						<i class="fa fa-bars story-item-menu" aria-hidden="true"></i>
+						<h4>Lists</h4>
+					</div>
 
 				</div>
 				<div class="link-content col s6">
-					<h4>Links</h4>
+					<div class="story-item-header">
 
+						<i class="fa fa-bars story-item-menu" aria-hidden="true"></i>
+						<h4>Links</h4>
+					</div>
 				</div>
 			</div>
 
 			<div class="comment-content">
-				<h4 class="comments-title">Comments</h4>
+				<div class="story-item-header">
+
+					<i class="fa fa-bars story-item-menu" aria-hidden="true"></i>
+					<h4 class="comments-title">Comments</h4>
+				</div>
 
 			</div>
 
@@ -101,6 +111,7 @@
   <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.10/handlebars.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.99.0/js/materialize.min.js"></script>
+  <script src="shared.js" charset="utf-8"></script>
   <script src="project.js" charset="utf-8"></script>
 </body>
 
