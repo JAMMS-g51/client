@@ -243,6 +243,14 @@ h
 	margin-right: 5%;
 }
 
+.link-edit {
+	margin-right: 5%;
+}
+
+.link-edit:hover {
+	cursor: pointer;
+}
+
 .story-item-header {
 	display: flex;
 	flex-direction: row;
@@ -251,4 +259,41 @@ h
 .story-item-menu {
 	font-size: 30px;
 	margin: 0 5% 0 0;
+}
+
+
+.delete-story-button-container {
+	display: flex;
+	justify-content: center;
+	width: 100%;
+	padding: 1%;
+}
+
+
+.grouping-menu {
+}
+
+.remove-column-select {
+	display: flex;
+	align-items: center;
+	justify-content: space-around;
+}
+
+
+.link-delete {
+	margin-right: 5px;
+	display: none;
+	font-size: 16px;
+}
+
+.link-delete:hover {
+	color: #c43636;
+	font-size: 18px;
+	cursor: pointer;
+}
+
+
+.link-container {
+	display: flex;;
+	align-items: center;
 }
