@@ -16,13 +16,54 @@
     <div class="nav-wrapper teal lighten-2">
       <a href="index.html" class="brand-logo left">Jello</a>
       <ul id="nav-mobile" class="right">
-        <li class="logout-word"><a href="">Logout</a></li>
+
+		  <li><a class="dropdown-button" href="#!" data-activates="dropdown1">Columns<i class="material-icons right"></i></a></li>
+      <li class="logout-word"><a href="">Logout</a></li>
+
       </ul>
     </div>
   </nav>
-  <main class="container-fluid">
 
-		<h4 class="center project-name"></h4>
+  <ul id="dropdown1" class="dropdown-content">
+  <li><a href="#modal-add-column">Add</a></li>
+  <li class="divider"></li>
+  <li><a href="#modal-remove-column">Remove</a></li>
+	</ul>
+
+	<div id="modal-add-column" class="modal">
+      <div class="modal-content">
+        <form class="center-align">
+          <input class="add-column-name" type="text" name="" placeholder="Enter column name..." required>
+          <button class='btn modal-action' id="create-grouping-button" type="button" name="button">Create</button>
+        </form>
+      </div>
+    </div>
+
+	<div id="modal-remove-column" class="modal">
+      <div class="modal-content">
+			<div class="remove-column-select">
+				<select id="remove-column-select" class="browser-default">
+					<option value="" selected disabled>Select column to remove</option>
+		        </select>
+					<a class="waves-effect waves-light red btn" id="remove-column-button">Delete</a>
+			</div>
+
+      </div>
+    </div>
+
+
+  <main class="container-fluid">
+		<div class="row">
+			<div class="col s4">
+
+			</div>
+			<div class="col s4">
+				<h4 class="center project-name"></h4>
+			</div>
+			<div class="col s4 grouping-menu">
+
+			</div>
+		</div>
 	  <div class="story-modal">
 
 	  </div>
@@ -31,20 +72,15 @@
     </div>
   </main>
   <script id="grouping-template" type="text/x-handlebars-template">
-    <div class="col s12 m3">
+    <div class="col s12 m3 grouping-template" grouping-id={{grouping_id}}>
       <div class="card grouping-card">
         <div class="grouping-header">
           <span class="grouping-card-title">{{grouping_name}}</span>
 		  <i class="fa fa-plus-square-o grouping-add-story right" aria-hidden="true"></i>
         </div>
-		<!-- <div class="input-field col s12">
-			<textarea id="message" class="materialize-textarea"></textarea>
-			<label for="message">Message</label>
-		</div> -->
         <div id={{grouping_id}}>
 			<form class="add-story-form">
 				<input type="text" size="35" placeholder="Add story here"/>
-				<!-- <input  type="submit" class="story-submit"/> -->
 				<i class="fa fa-check story-submit"aria-hidden="true"></i>
 				<i class="fa fa-ban story-cancel" aria-hidden="true"></i>
 			</form>
@@ -52,10 +88,11 @@
 
         </div>
       </div>
+  	</div>
   </script>
 
   <script id="story-template" type="text/x-handlebars-template">
-    <p class="story-title" data-id="{{id}}"id={{story_id}}>{{story_name}}</p>
+    <p class="story-title" story-id="{{id}}"id={{story_id}}>{{story_name}}</p>
   </script>
 
   <script id="story-add-template" type="text/x-handlebars-template">
@@ -63,7 +100,7 @@
   </script>
 
   <script id="story-expanded-template" id="story-expanded-template" type="text/x-handlebars-template">
-   <div class="story-details" data-id="{{story_id}}">
+   <div class="story-details" story-id="{{story_id}}">
 	   <div class="story-expanded-header">
 			<h5 class="story-expanded-title">{{story_name}}</h5>
 			<i class="fa fa-times-circle" id="modal-close"aria-hidden="true"></i>
@@ -81,8 +118,17 @@
 				<div class="link-content col s6">
 					<div class="story-item-header">
 
-						<i class="fa fa-bars story-item-menu" aria-hidden="true"></i>
+						<i class="fa fa-pencil link-edit story-link-menu" aria-hidden="true"></i>
 						<h4>Links</h4>
+
+					</div>
+					<div class="add-link-form-container" style="display: none">
+						<form class="add-link-form">
+							<input id="link-name" type="text" size="35" placeholder="Link name"/>
+							<input id="link-url" type="text" size="35" placeholder="Link url"/>
+							<i class="fa fa-check link-submit"aria-hidden="true"></i>
+							<i class="fa fa-ban link-cancel" aria-hidden="true"></i>
+						</form>
 					</div>
 				</div>
 			</div>
@@ -93,8 +139,18 @@
 					<i class="fa fa-bars story-item-menu" aria-hidden="true"></i>
 					<h4 class="comments-title">Comments</h4>
 				</div>
-
+				<div class="add-link-form-container">
+					<form class="add-comment-form">
+						<input id="link-name" type="text" size="35" placeholder="Add comment..."/>
+						<i class="fa fa-check"aria-hidden="true"></i>
+						<i class="fa fa-ban" aria-hidden="true"></i>
+					</form>
+				</div>
 			</div>
+			<div class="delete-story-button-container">
+				<a class="waves-effect waves-light btn" id="delete-story-button">Delete Story</a>
+			</div>
+
 
 
 		</div>
