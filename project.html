@@ -99,6 +99,23 @@
 
   </script>
 
+
+  <script id="comment-template" type="text/x-handlebars-template">
+	<div class="comment-container" comment-id="{{comment_id}}">
+		<div class="comment-header">
+			<h5>{{user_name}}</h5>
+			<small><p>{{date}}</p></small>
+		</div>
+		<div class="comment-body">
+			<p>
+				{{comment_content}}
+			</p>
+		</div>
+
+	</div>
+
+  </script>
+
   <script id="story-expanded-template" id="story-expanded-template" type="text/x-handlebars-template">
    <div class="story-details" story-id="{{story_id}}">
 	   <div class="story-expanded-header">
@@ -135,15 +152,13 @@
 
 			<div class="comment-content">
 				<div class="story-item-header">
-
-					<i class="fa fa-bars story-item-menu" aria-hidden="true"></i>
 					<h4 class="comments-title">Comments</h4>
 				</div>
-				<div class="add-link-form-container">
+				<div class="add-comment-form-container">
 					<form class="add-comment-form">
-						<input id="link-name" type="text" size="35" placeholder="Add comment..."/>
-						<i class="fa fa-check"aria-hidden="true"></i>
-						<i class="fa fa-ban" aria-hidden="true"></i>
+						<input id="comment-text-field" class="materialize-textarea comment-text-field" wrap="hard" type="text" size="200" placeholder="Add comment..."/>
+						<i class="fa fa-check submit-comment"aria-hidden="true"></i>
+						<i class="fa fa-ban clear-comment" aria-hidden="true"></i>
 					</form>
 				</div>
 			</div>

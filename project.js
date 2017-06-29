@@ -123,6 +123,8 @@ function createStoryModal(story) {
 	appendComments(story);
 	initLinkAddButton();
 	initStoryDeleteButton(story);
+	initClearComment();
+	initSubmitComment();
     initStoryModal();
 }
 
@@ -198,8 +200,9 @@ function removeLinkFromStory(link) {
 function appendComments(story) {
 	if(!story.comments) { return; }
 	story.comments.forEach(comment => {
-		let content = $(`<p class="comment" comment-id="${comment.id}">${comment.content}</p>`);
-		$('.comment-content').append(content);
+		// let content = $(`<p class="comment" comment-id="${comment.id}">${comment.content}</p>`);
+		// $('.comment-content').append(content);
+		renderComment(comment);
 	})
 }
 
@@ -330,6 +333,53 @@ function initCloseLinkField() {
 		$('.add-link-form-container').hide();
 		$('.link-delete').hide();
 
-  	});
-  
-  }
+	});
+}
+
+
+
+function renderComment(comment, userName) {
+	$.get(`${API_URL}users/${comment.users_id}`).then(user => {
+		if(!comment.created_at) {
+			comment.created_at = new Date();
+		}
+		let context = {
+			user_name: user[0].name,
+			comment_content: comment.content,
+			comment_id: comment.id,
+			date: comment.created_at
+		}
+		console.log(context);
+		let source = $("#comment-template").html();
+		let template = Handlebars.compile(source);
+		let html = template(context);
+		$('.comment-content').append(html);
+	});
+}
+
+
+
+function initSubmitComment() {
+	$('.submit-comment').click(() => {
+		let comment = {
+			users_id: localStorage.user_id,
+			story_id: $('.story-details').attr('story-id'),
+			content: $('#comment-text-field').val()
+		}
+		$('#comment-text-field').val('');
+		$.get(`${API_URL}users/${comment.users_id}`).then(user => {
+			userName = user[0].name;
+			$.post(`${API_URL}comment`, comment).then(response => {
+				renderComment(response[0], userName);
+			});
+		})
+
+	});
+}
+
+function initClearComment() {
+	$('.clear-comment').click(() => {
+		$('#comment-text-field').val('');
+	})
+}
+
