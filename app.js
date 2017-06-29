@@ -31,7 +31,10 @@ function getUserProjects(userId) {
 		}).then(projects => {
 		displayProjects(projects);
 		displayCreateProject();
-	});
+	}).catch(() => {
+		window.location = '400.html';
+	}
+);
 }
 
 function displayProjects(projects) {
@@ -66,7 +69,6 @@ function createProject(){
 				project_id: results[0].id
 			}
 		$.post('http://localhost:3000/api/v1/user_project', userProjectInfo).then(results => {
-			console.log(results);
 			//redirect to that project page with the project id
 			window.location = `project.html?id=${results[0].id}`
 		});
@@ -113,8 +115,10 @@ function initializeLogin() {
 				loading();
 			}
     }).catch(error => {
+			// console.log('something');
+			// console.log(error);
 			Materialize.toast(error.responseJSON.message, 3000);
-		})
+		});
   });
 }
 
@@ -129,6 +133,9 @@ function getLoginPage() {
 function getProjectInfo() {
 	let projectName = $('.project-name').val();
 	let projectImgUrl = $('.add-project-image').val();
+	if(projectImgUrl == ''){
+		projectImgUrl = 'https://source.unsplash.com/random';
+	}
 	return {
 		name: projectName,
 		image_url: projectImgUrl
@@ -165,7 +172,7 @@ function loading() {
 	$('.loader').css('display', 'flex');
 	setTimeout(() => {
 		window.location = 'index.html';
-	}, 1000);
+	}, 300);
 
 }
 

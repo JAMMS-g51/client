@@ -2,32 +2,32 @@ $(appReady);
 
 
 function appReady() {
-  let userProjectId = getUserProjectId();
-  console.log(userProjectId);
-  getProject(userProjectId);
+  let projectId = getProjectId();
+  //console.log(projectId);
+  getProject(projectId);
 }
 
 function getProject(id) {
   return $.get(`http://localhost:3000/api/v1/user_project/${id}`)
     .then(userProjects => {
-      console.log(userProjects);
+      //console.log(userProjects);
       return $.get({
           url: `http://localhost:3000/api/v1/user/${userProjects[0].users_id}/project/${userProjects[0].project_id}`,
           headers: {
             Authorization: `Bearer ${localStorage.token}`
           }
-
 	}).then(projects => {
-    createNameInHeader(projects.name);
+      createNameInHeader(projects.name);
       displayGroups(projects.groupings);
-    initGroupingEventHandlers()
+      initGroupingEventHandlers()
   }).catch(error => {
-    console.log(error);
+    //console.log(error);
+    window.location = '400.html';
   });
 });
 }
 
-function getUserProjectId() {
+function getProjectId() {
   let currentIndex = window.location.href;
   let charArray = currentIndex.split('');
   let index = charArray.indexOf('=') + 1;

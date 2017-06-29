@@ -227,3 +227,16 @@ h
 .add-story-form {
 	display: none;
 }
+
+.layer {
+    background-color: rgba(169, 169, 169, 0.7);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.project-text-name {
+  z-index: 9000238402;
+}
