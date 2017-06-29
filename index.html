@@ -75,11 +75,13 @@
 
 	</div>
 	<script id="project-template" type="text/x-handlebars-template">
-          <a href="project.html?id={{user_project.id}}">
+          <a href="project.html?id={{id}}">
             <div class="card project-card col s12 m4 l3">
               <div class="card-image">
                 <img class="project-image" src={{image_url}}>
-                <span class="card-title flow-text">{{name}}</span>
+                <div class="layer">
+                </div>
+                <span class="card-title flow-text project-text-name">{{name}}</span>
               </div>
             </div>
           </a>
