@@ -1,8 +1,17 @@
-const postURL = 'http://localhost:3000/api/v1/users';
-const loginURL = 'http://localhost:3000/api/v1/auth/login';
+
 $(appReady);
 
+let API_URL = 'https://jello-api.herokuapp.com/api/v1/'
+
+function getUrl() {
+	API_URL = 'https://jello-api.herokuapp.com/api/v1/';
+		console.log(window.location.href);
+	if(window.location.href == 'http://127.0.0.1:8080/') {
+		API_URL = 'http://localhost:3000/api/v1/';
+	}
+}
 function appReady() {
+	getUrl();
 	//$('.loader').hide();
 	checkLoggedIn();
 	logout();
@@ -24,7 +33,7 @@ function checkLoggedIn() {
 
 function getUserProjects(userId) {
 	return $.get({
-			url: `${postURL}/${userId}/project`,
+			url: `${API_URL}users/${userId}/project`,
 			headers: {
 				Authorization: `Bearer ${localStorage.token}`
 			}
@@ -36,6 +45,7 @@ function getUserProjects(userId) {
 
 function displayProjects(projects) {
 	projects.forEach(project => {
+		console.log(project);
 		const source = $('#project-template').html();
 		const template = Handlebars.compile(source);
 		const html = template(project);
@@ -59,13 +69,13 @@ function createProject(){
 	$('.project-page').on('click', '.create-project-submission', (event) => {
 		event.preventDefault();
 		let projectInfo = getProjectInfo();
-		$.post('http://localhost:3000/api/v1/project', projectInfo)
+		$.post(`${API_URL}project`, projectInfo)
 		.then(results => {
 			let userProjectInfo = {
 				users_id: localStorage.user_id,
 				project_id: results[0].id
 			}
-		$.post('http://localhost:3000/api/v1/user_project', userProjectInfo).then(results => {
+		$.post(`${API_URL}user_project`, userProjectInfo).then(results => {
 			console.log(results);
 			//redirect to that project page with the project id
 			window.location = `project.html?id=${results[0].id}`
@@ -81,13 +91,13 @@ function initializeSignUp() {
   $('.create-account').submit(function(event) {
     event.preventDefault();
     const userInfo = getSignUpInfo();
-    $.post(postURL, userInfo)
-      .then(function(result) {
+    $.post(`${API_URL}users`, userInfo)
+      .then((result) => {
 				let loginInfo = {
 					email: userInfo.email,
 					password: userInfo.password
 				};
-				$.post(loginURL, loginInfo).then(response => {
+				$.post(`${API_URL}auth/login`, loginInfo).then(response => {
 					localStorage.token = response.token;
 					localStorage.user_id = response.id;
 					if(localStorage.token){
@@ -106,7 +116,7 @@ function initializeLogin() {
   $('.login-account').submit(function(event) {
     event.preventDefault();
     const loginInfo = getLoginInfo();
-    $.post(loginURL, loginInfo).then(response => {
+    $.post(`${API_URL}auth/login`, loginInfo).then(response => {
       localStorage.token = response.token;
       localStorage.user_id = response.id;
 			if(localStorage.token){
