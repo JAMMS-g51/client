@@ -41,10 +41,10 @@ function getProject(id) {
 
   }).catch(error => {
     //console.log(error);
-    window.location = '404.html';
+    // window.location = '404.html';
   });
 }).catch(error => {
-  window.location = '404.html';
+  // window.location = '404.html';
 });
 }
 
@@ -105,7 +105,7 @@ function renderStory(story, grouping_id) {
 
 function createStoryModal(oldStory) {
 	let id = getProjectId();
-	let updatedStory
+	let updatedStory = oldStory;
 	$.get(`${API_URL}user_project/${id}`)
       .then(userProjects => {
         $.get({
@@ -114,6 +114,7 @@ function createStoryModal(oldStory) {
               Authorization: `Bearer ${localStorage.token}`
             }
   	}).then(response => {
+		console.log(response);
 		response.groupings.forEach(grouping => {
 			grouping.stories.forEach(story => {
 				if(story.id === oldStory.id) {
@@ -122,6 +123,7 @@ function createStoryModal(oldStory) {
 			})
 		})
 		let story = updatedStory;
+		console.log(story);
 		$('.story-modal').empty();
 		let context = {
 			story_name: story.name,
@@ -142,7 +144,10 @@ function createStoryModal(oldStory) {
 		initAddLinkButton();
 		initListCreateButton();
 		initListNameCancel();
-		initEditListButton()
+		initCreateListTitleButton();
+		initEditListButton();
+		initListItemSubmit();
+		initCancelListItemSubmit();
 		initCloseLinkField();
 	    initStoryModal();
 	});
@@ -169,47 +174,51 @@ function initStoryModal() {
 	})
 }
 
-function appendLists(story) {
-	if(!story.lists) { return; }
-	story.lists.forEach(list => {
-		let icon = `<i class="fa fa-pencil list-edit" aria-hidden="true"></i>`
-		let newList = $(`<ul class="story-list-title" list-id="${list.id}">${icon}${list.name}</ul>`)
-		list.items.forEach(item => {
-			newList.append($(`<li class="story-list" list-item-id="${item.id}">${item.content}</li>`))
-		});
-		$('.list-content').append(newList);
-	});
-}
-
 // function appendLists(story) {
 // 	if(!story.lists) { return; }
 // 	story.lists.forEach(list => {
-// 		renderList(list);
+// 		let icon = `<i class="fa fa-pencil list-edit" aria-hidden="true"></i>`
+// 		let newList = $(`<ul class="story-list-title" list-id="${list.id}">${icon}${list.name}</ul>`)
+// 		list.items.forEach(item => {
+// 			newList.append($(`<li class="story-list" list-item-id="${item.id}">${item.content}</li>`))
+// 		});
+// 		$('.list-content').append(newList);
 // 	});
 // }
 
-// function renderList(list) {
-// 	let context = {
-// 		list_id: list.id,
-// 		list_name: list.name
-// 	}
-// 	let source = $("#list-template").html();
-// 	let template = Handlebars.compile(source);
-// 	let html = template(context);
-// 	let newList = $(html);
-// 	$('.list-content').append(html);
-// 	console.log($(newList[0]));
-// 	renderListItems(newList, list);
-// }
+function appendLists(story) {
+	if(!story.lists) { return; }
+	story.lists.forEach(list => {
+		renderList(list);
+	});
+}
 
-// function renderListItems(newList, list) {
-// 	$(newList[0]).remove();
-// 	list.items.forEach(item => {
-// 		console.log(item.content);
-// 		// $(newList).find('ul')[0].append($(`<li>${item.content}</li>`));
-// 			$(newList).find('ul')[0].append("$(`<li>hello</li>`)");
-// 	})
-// }
+function renderList(list) {
+	console.log(list);
+	let context = {
+		list_id: list.id,
+		list_name: list.name
+	}
+	let source = $("#list-template").html();
+	let template = Handlebars.compile(source);
+	let html = template(context);
+	let newList = $(html);
+	$('.list-content').append(newList);
+	// console.log($(newList[0]));
+	if(list.items) {
+		renderListItems(newList, list);
+	}
+
+}
+
+function renderListItems(newList, list) {
+	// $(newList[0]).remove();
+	list.items.forEach(item => {
+		// console.log(item.content);
+		$(newList).find('ul').append($(`<li>${item.content}</li>`));
+			// $(newList).find('ul')[0].append("$(`<li>hello</li>`)");
+	})
+}
 
 
 
@@ -447,21 +456,62 @@ function initListNameCancel() {
 
 function initCreateListTitleButton() {
 	$('.list-title-submit').click(() => {
-
+		let newListTitle = {
+			story_id: $('.story-details').attr('story-id'),
+			name: $('#list-name').val()
+		}
+		$.post(`${API_URL}list`, newListTitle).then(listTitle => {
+			// console.log(listTitle);
+			newListTitle.list_id = listTitle[0].id;
+			newListTitle.list_name = newListTitle.name;
+			renderList(newListTitle)
+		})
+		$('#list-name').val('')
 	})
 }
 
 
 function initEditListButton() {
 	$('.list-edit').click((event) => {
-		if($(event.target).find('add-list-item-container')) { console.log(true); }
-		let newFormContainer = $(`<div class="add-list-item-container">`)
-		let newForm = $(`<form></form>`)
-		let newField = $(`<input type="text" size="35" placeholder="Add item"/>`);
-		let submitNewListItemButton = $(`<i class="fa fa-check"aria-hidden="true"></i>`)
-		let cancelNewListItemButton = $(`<i class="fa fa-ban"aria-hidden="true"></i>`)
-		newForm.append(newField);
-		newFormContainer.append(newForm).append(submitNewListItemButton).append(cancelNewListItemButton);
-		$(event.target).parent().append(newForm);
-	})
+		// $('.add-list-item-form').show();
+		$(event.target).parent().parent().find('form').show();
+	});
 }
+
+
+function initCancelListItemSubmit() {
+	$('.list-item-cancel').click((event) => {
+		$(event.target).siblings('input').val('');
+		$(event.target).parent().hide();
+	});
+}
+
+function initListItemSubmit() {
+	$('.list-item-submit').click((event) => {
+		let newListItem = {
+			content: $(event.target).siblings('input').val(),
+			list_id: $(event.target).siblings('input').attr('list-id')
+		}
+		$.post(`${API_URL}list_item`, newListItem).then(response => {
+			newListItem.id = response[0].id;
+			console.log(newListItem);
+			$(event.target).parent().siblings('ul').append($(`<li>${newListItem.content}</li>`))
+		})
+		$(event.target).parent().hide();
+		$(event.target).siblings('input').val('')
+	});
+}
+
+// function initEditListButton() {
+// 	$('.list-edit').click((event) => {
+// 		if($(event.target).find('.add-list-item-container')) { console.log(true); }
+// 		let newFormContainer = $(`<div class="add-list-item-container">`)
+// 		let newForm = $(`<form></form>`)
+// 		let newField = $(`<input type="text" size="35" placeholder="Add item"/>`);
+// 		let submitNewListItemButton = $(`<i class="fa fa-check"aria-hidden="true"></i>`)
+// 		let cancelNewListItemButton = $(`<i class="fa fa-ban"aria-hidden="true"></i>`)
+// 		newForm.append(newField);
+// 		newFormContainer.append(newForm).append(submitNewListItemButton).append(cancelNewListItemButton);
+// 		$(event.target).parent().append(newForm);
+// 	})
+// }
