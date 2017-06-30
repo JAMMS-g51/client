@@ -1,0 +1,23 @@
+{
+  "name": "client",
+  "version": "1.0.0",
+  "description": "##JAMMS (Jason Clifton, Andrew Alvarez, Matt Pitts, Matt Victor, Stephen Warton)",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JAMMS-g51/client.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/JAMMS-g51/client/issues"
+  },
+  "homepage": "https://github.com/JAMMS-g51/client#readme",
+  "dependencies": {
+    "sortablejs": "^1.6.0"
+  }
+}

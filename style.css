@@ -361,3 +361,7 @@ img.project-image {
 	font-size: 25px;
 	margin-right: 3%;
 }
+
+.sortable-ghost {
+  min-height: 10px;
+}
