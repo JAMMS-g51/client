@@ -15,7 +15,6 @@ function appReady() {
 //   	let userProjectId = getUserProjectId();
 //   	getProject(userProjectId);
   	let projectId = getProjectId();
-  	console.log(projectId);
   	getProject(projectId);
     logout();
 }
@@ -32,7 +31,6 @@ function getProject(id) {
           }
 	}).then(projects => {
 
-		console.log(projects);
     createNameInHeader(projects.name);
 	initAddGroupingButton(projects.id);
       displayGroups(projects.groupings);
@@ -105,27 +103,50 @@ function renderStory(story, grouping_id) {
 }
 
 
-function createStoryModal(story) {
-
-	$('.story-modal').empty();
-	let context = {
-		story_name: story.name,
-		story_id: story.id
-
-	}
-	const source = $("#story-expanded-template").html();
-	const template = Handlebars.compile(source);
-	const html = template(context);
-	$('.story-modal').append(html);
-	$('.story-modal').css('display', 'flex');
-	appendLists(story);
-	appendLinks(story);
-	appendComments(story);
-	initLinkAddButton();
-	initStoryDeleteButton(story);
-	initClearComment();
-	initSubmitComment();
-    initStoryModal();
+function createStoryModal(oldStory) {
+	let id = getProjectId();
+	let updatedStory
+	$.get(`${API_URL}user_project/${id}`)
+      .then(userProjects => {
+        $.get({
+            url: `${API_URL}user/${userProjects[0].users_id}/project/${userProjects[0].project_id}`,
+            headers: {
+              Authorization: `Bearer ${localStorage.token}`
+            }
+  	}).then(response => {
+		response.groupings.forEach(grouping => {
+			grouping.stories.forEach(story => {
+				if(story.id === oldStory.id) {
+					updatedStory = story;
+				}
+			})
+		})
+		let story = updatedStory;
+		$('.story-modal').empty();
+		let context = {
+			story_name: story.name,
+			story_id: story.id
+		}
+		const source = $("#story-expanded-template").html();
+		const template = Handlebars.compile(source);
+		const html = template(context);
+		$('.story-modal').append(html);
+		$('.story-modal').css('display', 'flex');
+		appendLists(story);
+		appendLinks(story);
+		appendComments(story);
+		initLinkAddButton();
+		initStoryDeleteButton(story);
+		initClearComment();
+		initSubmitComment();
+		initAddLinkButton();
+		initListCreateButton();
+		initListNameCancel();
+		initEditListButton()
+		initCloseLinkField();
+	    initStoryModal();
+	});
+});
 }
 
 function initStoryDeleteButton(story) {
@@ -160,6 +181,38 @@ function appendLists(story) {
 	});
 }
 
+// function appendLists(story) {
+// 	if(!story.lists) { return; }
+// 	story.lists.forEach(list => {
+// 		renderList(list);
+// 	});
+// }
+
+// function renderList(list) {
+// 	let context = {
+// 		list_id: list.id,
+// 		list_name: list.name
+// 	}
+// 	let source = $("#list-template").html();
+// 	let template = Handlebars.compile(source);
+// 	let html = template(context);
+// 	let newList = $(html);
+// 	$('.list-content').append(html);
+// 	console.log($(newList[0]));
+// 	renderListItems(newList, list);
+// }
+
+// function renderListItems(newList, list) {
+// 	$(newList[0]).remove();
+// 	list.items.forEach(item => {
+// 		console.log(item.content);
+// 		// $(newList).find('ul')[0].append($(`<li>${item.content}</li>`));
+// 			$(newList).find('ul')[0].append("$(`<li>hello</li>`)");
+// 	})
+// }
+
+
+
 function appendLinks(story) {
 	if(!story.links) { return; }
 	story.links.forEach(link => {
@@ -192,7 +245,6 @@ function removeLinkFromStory(link) {
 		url: `${API_URL}link/${link.id}`,
 		type: 'DELETE',
 		success: function(result) {
-			console.log(result);
 		}
 	});
 }
@@ -251,7 +303,6 @@ function initAddGroupingButton(id) {
 		}
 		$('.add-column-name').val('')
 		$.post(`${API_URL}grouping`, newGroup).then(response => {
-			console.log(response[0]);
 			renderGroup(response[0]);
 			addGroupingToSelectMenu(response[0]);
 			$('#modal-add-column').modal('close');
@@ -296,8 +347,6 @@ function initRemoveColumnButton() {
 function initLinkAddButton() {
 	$('.story-link-menu').click(() => {
 		$('.add-link-form-container').show();
-		initAddLinkButton();
-		initCloseLinkField();
 		$('.fa-trash-o').show();
 	});
 }
@@ -310,7 +359,6 @@ function initAddLinkButton() {
 			story_id: $('.story-details').attr('story-id')
 		};
 		$.post(`${API_URL}link`, newLink).then(response => {
-			console.log(response);
 			$('#link-name').val('');
 			$('#link-url').val('');
 			appendLinkToStoryModal(response[0]);
@@ -349,7 +397,6 @@ function renderComment(comment, userName) {
 			comment_id: comment.id,
 			date: comment.created_at
 		}
-		console.log(context);
 		let source = $("#comment-template").html();
 		let template = Handlebars.compile(source);
 		let html = template(context);
@@ -383,3 +430,38 @@ function initClearComment() {
 	})
 }
 
+
+function initListCreateButton() {
+	$('.story-list-menu').click(() => {
+		$('.add-list-form-container').show();
+	})
+}
+
+function initListNameCancel() {
+	$('.list-title-cancel').click(() => {
+		$('.add-list-form-container').hide();
+		$('#list-name').val('');
+	});
+}
+
+
+function initCreateListTitleButton() {
+	$('.list-title-submit').click(() => {
+
+	})
+}
+
+
+function initEditListButton() {
+	$('.list-edit').click((event) => {
+		if($(event.target).find('add-list-item-container')) { console.log(true); }
+		let newFormContainer = $(`<div class="add-list-item-container">`)
+		let newForm = $(`<form></form>`)
+		let newField = $(`<input type="text" size="35" placeholder="Add item"/>`);
+		let submitNewListItemButton = $(`<i class="fa fa-check"aria-hidden="true"></i>`)
+		let cancelNewListItemButton = $(`<i class="fa fa-ban"aria-hidden="true"></i>`)
+		newForm.append(newField);
+		newFormContainer.append(newForm).append(submitNewListItemButton).append(cancelNewListItemButton);
+		$(event.target).parent().append(newForm);
+	})
+}

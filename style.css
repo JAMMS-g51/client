@@ -84,7 +84,6 @@ img.project-image {
   box-shadow: 1px 1px 6px #3a3a3a;
   overflow: hidden;
 }
-h
 .story-title:hover {
 	box-shadow: 3px 3px 6px #3a3a3a;
 	background: linear-gradient(#c9d9db, #efefef);
@@ -111,7 +110,7 @@ h
 	left: 20vw;
 	top: 10vh;
 	display: none;
-	z-index: 10000000000;
+	z-index: 100;
 	padding: 0;
 	margin: 0;
 	overflow-y: scroll;
@@ -304,6 +303,7 @@ h
 .link-submit {
 	color: #4faf46;
 }
+
 .link-submit:hover {
 	cursor: pointer;
 }
@@ -336,4 +336,28 @@ h
 .comment-header p {
 	margin-left: 20%;
 	width: 100%;
+}
+
+.submit-comment {
+	color: #4faf46;
+	font-size:20px;
+}
+
+.clear-comment {
+	font-size: 20px;
+}
+
+.submit-comment:hover {
+	cursor: pointer;
+}
+
+.clear-comment:hover {
+	cursor: pointer;
+	color: gray;
+}
+
+
+.story-list-menu {
+	font-size: 25px;
+	margin-right: 3%;
 }
