@@ -5,70 +5,117 @@
   <meta charset="utf-8">
   <title>Jello</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <link href="https://fonts.googleapis.com/css?family=Julius+Sans+One|Oswald:300" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Julius+Sans+One%7COswald:300" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.99.0/css/materialize.min.css">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="test.css">
 </head>
 
 <body>
   <nav>
     <div class="nav-wrapper teal lighten-2">
       <a href="#" class="brand-logo">Jello</a>
+
       <ul id="nav-mobile" class="right ">
-        <li><a href="#modal-login">Login</a></li>
+        <li class="login-word"><a href="#modal-login">Login</a></li>
+        <li class="logout-word"><a href="index.html">Logout</a></li>
 
       </ul>
     </div>
   </nav>
   <main class="container-fluid">
-	  <div  class="login-page">
-	    <div class="landing-background">
-	      <div class="landing-focus">
-	        <h1 class="landing-title">Jello</h1>
-	        <h5 class="landing-tagline">Bringing teams together</h5>
-	        <a class="waves-effect waves-light btn" href="#modal-signup">Get Started</a>
-	      </div>
-	    </div>
-
-
-
-    <div id="modal-signup" class="modal modal-signup">
-      <div class="modal-content">
-        <form class="create-account  center-align">
-          <input class='user-name' type="text" name="" placeholder="Name" required>
-          <input class="user-email" type="email" name="" placeholder="Email" required>
-          <input class="user-password" type="password" placeholder="Password" required>
-          <button class='btn' type="submit" name="button">Sign Up</button>
-        </form>
+    <div class="overlay loader">
+      <div class="preloader-wrapper big active">
+        <div class="spinner-layer spinner-green-only">
+          <div class="circle-clipper left">
+            <div class="circle"></div>
+          </div>
+          <div class="gap-patch">
+            <div class="circle"></div>
+          </div>
+          <div class="circle-clipper right">
+            <div class="circle"></div>
+          </div>
+        </div>
       </div>
     </div>
-    <div id="modal-login" class="modal modal-login">
-      <div class="modal-content">
-        <form class="login-account  center-align">
-          <input class="login-email" type="email" name="" placeholder="Email" required>
-          <input class="login-password" type="password" placeholder="Password" required>
-          <button class='btn' type="submit" name="button">Login</button>
-        </form>
+    <div class="login-page">
+      <div class="landing-background">
+        <div class="landing-focus">
+          <h1 class="landing-title">Jello</h1>
+          <h5 class="landing-tagline">Bringing teams together</h5>
+          <a class="waves-effect waves-light btn" href="#modal-signup">Get Started</a>
+        </div>
       </div>
+
+
+
+      <div id="modal-signup" class="modal modal-signup">
+        <div class="modal-content">
+          <form class="create-account  center-align">
+            <input class='user-name' type="text" placeholder="Name" required>
+            <input class="user-email" type="email" placeholder="Email" required>
+            <input class="user-password" type="password" placeholder="Password" required>
+            <button class='btn modal-action' type="submit" name="button">Sign Up</button>
+          </form>
+        </div>
+      </div>
+      <div id="modal-login" class="modal modal-login">
+        <div class="modal-content">
+          <form class="login-account  center-align">
+            <input class="login-email" type="email" placeholder="Email" required>
+            <input class="login-password" type="password" placeholder="Password" required>
+            <button class='btn modal-action' type="submit" name="button">Login</button>
+          </form>
+        </div>
+      </div>
+
+
     </div>
+    <div class="project-page row">
 
-
-
-	</div>
-	<div class="project-page row">
-
-	</div>
-	<script id="project-template" type="text/x-handlebars-template">
-          <a href="project.html">
-            <div class="card project-card col s12 m4 l3">
-              <div class="card-image">
-                <img class="project-image" src={{image_url}}>
-                <span class="card-title flow-text">{{name}}</span>
-              </div>
+    </div>
+    <script id="project-template" type="text/x-handlebars-template">
+      <a href="project.html?id={{id}}">
+        <div class="card project-card col s12 m4 l3">
+          <div class="card-image">
+            <img class="project-image" src={{image_url}}>
+            <div class="layer">
             </div>
-          </a>
-	</script>
+            <span class="card-title flow-text project-text-name">{{name}}</span>
+          </div>
+        </div>
+      </a>
+    </script>
+
+
+    <script id="project-create-template" type="text/x-handlebars-template">
+      <a class="create-project-clicker" href="#add-project-modal">
+        <div class="card project-card col s12 m4 l3">
+          <div class="card-image">
+            <img class="project-image" src="media/plus.png">
+            <div class="layer">
+            </div>
+            <span class="card-title flow-text white-text">Create New Project</span>
+          </div>
+        </div>
+      </a>
+      <div id="add-project-modal" class="modal">
+        <div class="modal-content">
+          <h4>Add project</h4>
+          <form class="add-modal">
+            <input class="project-name" placeholder="Project Name">
+            <input class="add-project-image" placeholder="Project Image URL">
+            <button class='btn modal-action create-project-submission' type="submit" name="button">Create Project</button>
+          </form>
+        </div>
+      </div>
+    </script>
+
+
   </main>
+
 
   <footer class="page-footer footer-copyright teal">
     <!-- <button class="btn testbutton" type="button" name="button">Get test</button> -->
@@ -77,8 +124,9 @@
     </div>
   </footer>
   <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.10/handlebars.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.10/handlebars.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.99.0/js/materialize.min.js"></script>
+  <script src="shared.js" charset="utf-8"></script>
   <script src="app.js" charset="utf-8"></script>
 </body>
 

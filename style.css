@@ -76,11 +76,288 @@ img.project-image {
 }
 
 .story-title {
-  background: #e8eda1;
-  border: 1px solid black;
-  border-radius: 8px;
+  /*background: #e3f5f7;*/
+  background: linear-gradient(#e3f5f7, white);
+  /*border: 1px solid black;*/
+  border-radius: 3px;
   padding: 10px;
+  box-shadow: 1px 1px 6px #3a3a3a;
+  overflow: hidden;
+}
+.story-title:hover {
+	box-shadow: 3px 3px 6px #3a3a3a;
+	background: linear-gradient(#c9d9db, #efefef);
+	cursor: pointer;
+}
+
+.story-title:active {
+	background: none;
+	background-color: #f2f2f2;
+	box-shadow: .1px .1px 1px #3a3a3a;
 }
 .grouping-card {
 	padding: 3%;
+	background: linear-gradient(#ddcce5, rgba(191, 177, 198, .8))
+	/*background-color: #7b6a96;*/
+}
+
+.story-modal {
+	width: 60vw;
+	height: 80vh;
+	color: white;
+	background-color: rgba(30, 30, 30, 0.9);
+	position: absolute;
+	left: 20vw;
+	top: 10vh;
+	display: none;
+	z-index: 100;
+	padding: 0;
+	margin: 0;
+	overflow-y: scroll;
+	overflow-x: hidden;
+
+}
+
+.story-expanded-header {
+	height: 10%;
+	width: 60vw;
+	background: linear-gradient(rgba(30,30,30,.6),rgba(0,0,0,.3));
+	margin: 0;
+	padding: 0;
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+}
+
+.story-expanded-title {
+	margin: 0 0 0 5%;
+	padding: 0;
+	width: 85%;
+	font-family: 'Oswald', sans-serif;
+}
+
+.fa-times-circle {
+	font-size: 30px;
+}
+.fa-times-circle:hover {
+	font-size: 35px;
+	cursor: pointer;
+}
+
+.comment-content {
+	padding: 5%;
+}
+.story-content {
+	/*overflow-y: scroll;*/
+}
+
+.story-content ul {
+	font-size: 25px;
+	margin-top: 0;
+	font-family: 'Julius Sans One', sans-serif;
+	list-style-type: square;
+}
+.story-content li {
+	font-size: 18px;
+	font-family: 'Oswald', sans-serif;
+	list-style-type: square !important;
+	list-style-position: inside;
+
+
+}
+
+.link-list {
+	padding: 1vw 3vw 0 3vw;
+	width: 54vw;
+	max-width: 60vw;
+	margin: 0;
+	font-family: 'Oswald', sans-serif;
+}
+
+.link-content {
+	font-size: 22px;
+}
+
+.comments-title {
+	font-family: 'Oswald', sans-serif;
+	margin: 0;
+}
+
+
+.grouping-card-title {
+	font-family: 'Oswald', sans-serif;
+	font-size: 30px;
+	text-shadow: 2px 1px 3px gray;
+}
+
+.grouping-add-story {
+	font-size: 30px;
+	padding-top: 8px;
+}
+.grouping-add-story:hover {
+	font-size: 35px;
+	cursor: pointer;
+}
+
+.project-name {
+	font-family: 'Oswald', sans-serif;
+}
+
+
+.story-submit {
+	font-size: 25px;
+	color: #4faf46;
+	margin-left: 5%;
+}
+
+.story-submit:hover {
+	/*font-size: 30px;*/
+	cursor: pointer;
+}
+.story-cancel {
+	font-size: 20px;
+	margin-left: 5%;
+}
+.story-cancel:hover {
+	/*font-size: 25px;*/
+	cursor: pointer;
+	color: grey;
+}
+
+.add-story-form {
+	display: none;
+}
+.layer {
+    background-color: rgba(169, 169, 169, 0.7);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+.project-text-name {
+  z-index: 900;
+}
+.list-edit {
+	margin-right: 5%;
+}
+
+.link-edit {
+	margin-right: 5%;
+}
+
+.link-edit:hover {
+	cursor: pointer;
+}
+
+.story-item-header {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+}
+.story-item-menu {
+	font-size: 30px;
+	margin: 0 5% 0 0;
+}
+
+.add-modal {
+  z-index: 901;
+}
+
+.delete-story-button-container {
+	display: flex;
+	justify-content: center;
+	width: 100%;
+	padding: 1%;
+}
+
+
+.grouping-menu {
+}
+
+.remove-column-select {
+	display: flex;
+	align-items: center;
+	justify-content: space-around;
+}
+
+
+.link-delete {
+	margin-right: 5px;
+	display: none;
+	font-size: 16px;
+}
+
+.link-delete:hover {
+	color: #c43636;
+	font-size: 18px;
+	cursor: pointer;
+}
+
+
+.link-container {
+	display: flex;;
+	align-items: center;
+}
+
+.link-submit {
+	color: #4faf46;
+}
+
+.link-submit:hover {
+	cursor: pointer;
+}
+
+.link-cancel:hover {
+	cursor: pointer;
+	color: gray;
+}
+
+.comment-text-field {
+	width: 80%;
+	height: 200px;
+}
+
+.add-comment-form-container {
+	margin: 20px 0 20px 0;
+}
+
+.comment-header {
+	display: flex;
+	align-items: center;
+	background-color: rgba(130, 130, 130, .6);
+	padding-left: 10px;
+}
+
+.comment-body {
+	text-indent: 20px;
+}
+
+.comment-header p {
+	margin-left: 20%;
+	width: 100%;
+}
+
+.submit-comment {
+	color: #4faf46;
+	font-size:20px;
+}
+
+.clear-comment {
+	font-size: 20px;
+}
+
+.submit-comment:hover {
+	cursor: pointer;
+}
+
+.clear-comment:hover {
+	cursor: pointer;
+	color: gray;
+}
+
+
+.story-list-menu {
+	font-size: 25px;
+	margin-right: 3%;
 }
