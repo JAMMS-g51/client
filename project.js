@@ -85,6 +85,14 @@ function renderGroup(grouping) {
 	let newGroup = $(html);
     $('.grouping-page').append(newGroup);
 	initGroupingEventHandlers(newGroup);
+  var el = document.getElementById(grouping.id);
+  //var sortable = Sortable.create(el);
+   var sortable = new Sortable(el, {
+   group: 'story',
+      animation: 150,
+      ghostClass: "sortable-ghost"
+    })
+
 }
 
 function renderStory(story, grouping_id) {

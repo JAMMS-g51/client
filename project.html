@@ -78,7 +78,7 @@
           <span class="grouping-card-title">{{grouping_name}}</span>
 		  <i class="fa fa-plus-square-o grouping-add-story right" aria-hidden="true"></i>
         </div>
-        <div id={{grouping_id}}>
+        <div class="items sortable-ghost" id={{grouping_id}}>
 			<form class="add-story-form">
 				<input type="text" size="35" placeholder="Add story here"/>
 				<i class="fa fa-check story-submit"aria-hidden="true"></i>
@@ -128,7 +128,7 @@
   </script>
 
   <script id="story-expanded-template" type="text/x-handlebars-template">
-   <div class="story-details" story-id="{{story_id}}">
+   <div id="{{story_id}}" class="story-details" story-id="{{story_id}}">
 	   <div class="story-expanded-header">
 			<h5 class="story-expanded-title">{{story_name}}</h5>
 			<i class="fa fa-times-circle" id="modal-close"aria-hidden="true"></i>
@@ -200,6 +200,7 @@
   <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.10/handlebars.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.99.0/js/materialize.min.js"></script>
+  <script src="http://rubaxa.github.io/Sortable/Sortable.js"></script>
   <script src="shared.js" charset="utf-8"></script>
   <script src="project.js" charset="utf-8"></script>
 </body>
