@@ -99,6 +99,17 @@
 
   </script>
 
+  <script id="list-template" type="text/x-handlebars-template">
+	<div class="list-container">
+		<ul class="story-list-title" list-id={{list_id}}><i class="fa fa-pencil list-edit" aria-hidden="true"></i>{{list_name}}</ul>
+		<form class="add-list-item-form" hidden="true">
+			<input list-id={{list_id}} type="text" size="35" placeholder="List item"/>
+			<i class="fa fa-check list-item-submit"aria-hidden="true"></i>
+			<i class="fa fa-ban list-item-cancel" aria-hidden="true"></i>
+		</form>
+	</div>
+  </script>
+
 
   <script id="comment-template" type="text/x-handlebars-template">
 	<div class="comment-container" comment-id="{{comment_id}}">
@@ -116,7 +127,7 @@
 
   </script>
 
-  <script id="story-expanded-template" id="story-expanded-template" type="text/x-handlebars-template">
+  <script id="story-expanded-template" type="text/x-handlebars-template">
    <div class="story-details" story-id="{{story_id}}">
 	   <div class="story-expanded-header">
 			<h5 class="story-expanded-title">{{story_name}}</h5>
@@ -127,8 +138,15 @@
 				<div class="list-content col s6">
 					<div class="story-item-header">
 
-						<i class="fa fa-bars story-item-menu" aria-hidden="true"></i>
+						<i class="fa fa-plus-circle story-list-menu" aria-hidden="true"></i>
 						<h4>Lists</h4>
+					</div>
+					<div class="add-list-form-container" style="display: none">
+						<form class="add-list-title-form">
+							<input id="list-name" type="text" size="35" placeholder="List name"/>
+							<i class="fa fa-check list-title-submit"aria-hidden="true"></i>
+							<i class="fa fa-ban list-title-cancel" aria-hidden="true"></i>
+						</form>
 					</div>
 
 				</div>
@@ -144,7 +162,7 @@
 							<input id="link-name" type="text" size="35" placeholder="Link name"/>
 							<input id="link-url" type="text" size="35" placeholder="Link url"/>
 							<i class="fa fa-check link-submit"aria-hidden="true"></i>
-							<i class="fa fa-ban link-cancel" aria-hidden="true"></i>
+							<i class="fa fa-ban link-cancel right" aria-hidden="true"></i>
 						</form>
 					</div>
 				</div>
@@ -158,7 +176,7 @@
 					<form class="add-comment-form">
 						<input id="comment-text-field" class="materialize-textarea comment-text-field" wrap="hard" type="text" size="200" placeholder="Add comment..."/>
 						<i class="fa fa-check submit-comment"aria-hidden="true"></i>
-						<i class="fa fa-ban clear-comment" aria-hidden="true"></i>
+						<i class="fa fa-ban clear-comment right" aria-hidden="true"></i>
 					</form>
 				</div>
 			</div>
